@@ -18,3 +18,10 @@ library, without the you (the library user) having to depend on npm/node.
 - [ ] purgecss style dead code elimination
 - [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
   writing hiccup is important though for this workflow.)
+
+## Plan A
+
+- run postcss/tailwindcss via cli, produce css
+- read css using garden
+- transform
+  - reduce by looking at clojure source code for usage
