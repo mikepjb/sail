@@ -1,4 +1,4 @@
-# move
+# wind
 
 Use tailwind css classes in Clojure.
 
