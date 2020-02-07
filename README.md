@@ -25,3 +25,8 @@ library, without the you (the library user) having to depend on npm/node.
 - read css using garden
 - transform
   - reduce by looking at clojure source code for usage
+
+## Plan B
+
+- generate your own css file based on a similar system.
+- compare it to the minified distributed version for comparison of types.
