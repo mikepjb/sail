@@ -1,8 +1,14 @@
-# wind
+# sail
 
 Use tailwind css classes in Clojure.
 
 ## why?
+
+I want to use tailwindcss in Clojure without involving extra dependencies e.g
+npm/node/javascript/postcss/autoprefixer, especially not when this can be done
+in Clojure.
+
+A bit of background to those not familiar with tailwind:  
 
 tailwind is a utility first css framework that is a postcss plugin under the
 hood. It is intended to be used with autoprefixer (another postcss plugin) and
@@ -15,7 +21,9 @@ library, without the you (the library user) having to depend on npm/node.
 
 - [ ] consume all classes from tailwindcss npm (make this easy to re-run as new
   versions are released)
+- [ ] autoprefix css rules that require it.
 - [ ] purgecss style dead code elimination
+- [ ] cssnano, minification?
 - [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
   writing hiccup is important though for this workflow.)
 

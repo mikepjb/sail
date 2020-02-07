@@ -1,4 +1,4 @@
-(ns wind.core)
+(ns sail.core)
 
 (def sample-style-map
   {:html
