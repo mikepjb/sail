@@ -15,6 +15,35 @@
    :bg-transparent {:background-attachment "transparent"}
    ])
 
+(def background
+  [:bg-bottom {:background-position "bottom"}
+   :bg-center {:background-position "center"}
+   :bg-left {:background-position "left"}
+   :bg-left-bottom {:background-position "left bottom"}
+   :bg-left-top {:background-position "left top"}
+   :bg-right {:background-position "right"}
+   :bg-right-bottom {:background-position "right bottom"}
+   :bg-right-top {:background-position "right top"}
+   :bg-top {:background-position "top"}
+   :bg-repeat {:background-repeat "repeat"}
+   :bg-no-repeat {:background-repeat "no-repeat"}
+   :bg-repeat-x {:background-repeat "repeat-x"}
+   :bg-repeat-y {:background-repeat "repeat-y"}
+   :bg-repeat-round {:background-repeat "round"}
+   :bg-repeat-space {:background-repeat "space"}
+   :bg-auto {:background-size "auto"}
+   :bg-cover {:background-size "cover"}
+   :bg-contain {:background-size "contain"}])
+
+(def border
+  (reduce into
+          [:border-collapse {:border-collapse "collapse"}
+           :border-seperate {:border-collapse "seperate"}
+           :border-transparent {:border-collapse "transparent"}]
+          (color-class "border" "border-color")
+          (with-pseudo-class "hover" (color-class "border" "border-color"))
+          (with-pseudo-class "focus" (color-class "border" "border-color"))))
+
 ;; (defn with-media-query)
 (defn with-pseudo-class
   "Set a collection of rules to work for a given pseudo class"
@@ -30,7 +59,9 @@
                 (with-pseudo-class "hover" (color-class "bg" "background-color"))
                 (with-pseudo-class "focus" (color-class "bg" "background-color"))
                 ;; TODO active is disabled by default on vanilla Tailwind
-                (with-pseudo-class "active" (color-class "bg" "background-color"))
+                ;; (with-pseudo-class "active" (color-class "bg" "background-color"))
+                background
+                border
                 ]))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
