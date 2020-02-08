@@ -30,6 +30,7 @@ I love to use.**
   using sass?
 - [ ] cssnano, minification?
 - [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
+  - most likely a cljs npm language-server will do the trick.
   writing hiccup is important though for this workflow.)
 
 ## Plan A
