@@ -1,7 +1,8 @@
 (ns sail.core
   (:require [clojure.string]
             [sail.normalize :refer [normalize]]
-            [sail.base :refer [base]]))
+            [sail.base :refer [base]]
+            [sail.tailwind :refer [tailwind]]))
 
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
@@ -58,7 +59,8 @@
 ;; works.. but does not persist order
 ;; (style->string (reduce into (array-map) (reverse [normalize base])))
 
-(style->string base)
+;; (style->string base)
+(style->string tailwind)
 
 ;; debug single
 ;; (style->string normalize)
