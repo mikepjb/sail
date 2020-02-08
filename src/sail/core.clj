@@ -5,10 +5,24 @@
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
   [n]
+  ;; TODO generate these definitions based on the normalize array map,
+  ;; this is PRETTY long and you will need to maintain it otherwise.
   (if (contains? #{:html :body :main :h1 :h2 :h3 :h4 :h5 :h6 
                    :section :nav :header :footer :hr :pre :a
                    :b :strong :code :kbd :samp :small :sup :img
                    :button :input :optgroup :select :textarea
+                   :fieldSet :legend :progress
+                   (keyword "[type=\"button\"]")
+                   (keyword "[type=\"reset\"]")
+                   (keyword "[type=\"submit\"]")
+                   (keyword "button::-moz-focus-inner")
+                   (keyword "[type=\"button\"]::-moz-focus-inner")
+                   (keyword "[type=\"reset\"]::-moz-focus-inner")
+                   (keyword "[type=\"submit\"]::-moz-focus-inner")
+                   (keyword "button:-moz-focusring")
+                   (keyword "[type=\"button\"]:-moz-focusring")
+                   (keyword "[type=\"reset\"]:-moz-focusring")
+                   (keyword "[type=\"submit\"]:-moz-focusring")
                    (keyword "abbr[title]")} (keyword n))
     n (str "." n)))
 

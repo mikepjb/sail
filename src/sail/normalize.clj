@@ -65,9 +65,56 @@
     :img {:border-style "none"}
 
     [:button :input :optgroup :select :textarea]
-    ;; Change the font styles in all browsers.
-    {:font-family "inherit"
+    {;; Change the font styles in all browsers.
+     :font-family "inherit"
      :font-size "100%"
      :line-height 1.15
+     ;; Remove the margin in Firefox and Safari.
      :margin 0}
+
+    ;; Show the overflow in IE/Edge.
+    [:button :input] {:overflow "visible"}
+
+    ;; Remove the inheritance of text transform in Edge, Firefox and IE.
+    [:button :select] {:text-transform "none"}
+
+    ;; Correct the inability to style clickable types in iOS and Safari.
+    [:button
+     (keyword "[type=\"button\"]")
+     (keyword "[type=\"reset\"]")
+     (keyword "[type=\"submit\"]")] {:-webkit-appearance "button"}
+
+    ;; Remove the inner border and padding in Firefox.
+    [(keyword "button::-moz-focus-inner")
+     (keyword "[type=\"button\"]::-moz-focus-inner")
+     (keyword "[type=\"reset\"]::-moz-focus-inner")
+     (keyword "[type=\"submit\"]::-moz-focus-inner")] {:border-style "none" :padding 0}
+
+    ;; Restore the focus styles unset by the previous rule.
+    [(keyword "button:-moz-focusring")
+     (keyword "[type=\"button\"]:-moz-focusring")
+     (keyword "[type=\"reset\"]:-moz-focusring")
+     (keyword "[type=\"submit\"]:-moz-focusring")] {:outline "1px dotted ButtonText"}
+
+    ;; Correct the padding in Firefox.
+    :fieldSet {:padding "0.35em 0.75em 0.625em"}
+
+    :legend {;; Correct the text wrapping in Edge and IE.
+             :box-sizing "border-box"
+             :display "table"
+             :max-width "100%"
+             :white-space "normal"
+
+             ;; Correct the color inheritance from `fieldset` elements in IE.
+             :color "inherit"
+             ;; Remove the padding so developers are not caught out when they
+             ;; zero out `fieldset` elements in all browsers.
+             :padding 0}
+
+    ;; Add the correct vertical alignment in Chrome, Firefox, and Opera.
+    :progress {:vertical-align "baseline"}
+
+    ;; Remove the default vertical scrollbar in IE 10+.
+    :textarea {:overflow auto}
+
     ))
