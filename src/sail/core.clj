@@ -9,12 +9,19 @@
   ;; this is PRETTY long and you will need to maintain it otherwise.
   (if (contains? #{:html :body :main :h1 :h2 :h3 :h4 :h5 :h6 
                    :section :nav :header :footer :hr :pre :a
-                   :b :strong :code :kbd :samp :small :sup :img
+                   :b :strong :code :kbd :samp :small :sub :sup :img
                    :button :input :optgroup :select :textarea
-                   :fieldSet :legend :progress
+                   :fieldSet :legend :progress :details :summary
+                   :template
+                   (keyword "[type=\"checkbox\"]")
+                   (keyword "[type=\"radio\"]")
                    (keyword "[type=\"button\"]")
                    (keyword "[type=\"reset\"]")
                    (keyword "[type=\"submit\"]")
+                   (keyword "[type=\"search\"]")
+                   (keyword "[hidden]")
+                   (keyword "::-webkit-file-upload-button")
+                   (keyword "[type=\"search\"]::-webkit-search-decoration")
                    (keyword "button::-moz-focus-inner")
                    (keyword "[type=\"button\"]::-moz-focus-inner")
                    (keyword "[type=\"reset\"]::-moz-focus-inner")
@@ -23,6 +30,8 @@
                    (keyword "[type=\"button\"]:-moz-focusring")
                    (keyword "[type=\"reset\"]:-moz-focusring")
                    (keyword "[type=\"submit\"]:-moz-focusring")
+                   (keyword "[type=\"number\"]::-webkit-inner-spin-button")
+                   (keyword "[type=\"number\"]::-webkit-outer-spin-button")
                    (keyword "abbr[title]")} (keyword n))
     n (str "." n)))
 

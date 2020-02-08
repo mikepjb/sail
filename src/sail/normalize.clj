@@ -115,6 +115,43 @@
     :progress {:vertical-align "baseline"}
 
     ;; Remove the default vertical scrollbar in IE 10+.
-    :textarea {:overflow auto}
+    :textarea {:overflow "auto"}
 
-    ))
+    [(keyword "[type=\"checkbox\"]")
+     (keyword "[type=\"radio\"]")]
+    {;; Add the correct box sizing in IE 10.
+     :box-sizing "border-box"
+     ;; Remove the padding in IE 10.
+     :padding 0}
+
+    ;; Correct the cursor style of increment and decrement buttons in Chrome.
+    [(keyword "[type=\"number\"]::-webkit-inner-spin-button")
+     (keyword "[type=\"number\"]::-webkit-outer-spin-button")] {:height "auto"}
+
+    (keyword "[type=\"search\"]")
+    {;; Correct the odd appearance in Chrome and Safari.
+     :-webkit-appearance "textfield"
+     ;; Correct the outline style in Safari.
+     :outline-offset "-2px"}
+
+    ;; Remove the inner padding in Chrome and Safari on macOS.
+    (keyword "[type=\"search\"]::-webkit-search-decoration") {:-webkit-appearance "none"}
+
+    (keyword "::-webkit-file-upload-button")
+    {;; Correct the inability to style clickable types in iOS and Safari.
+     :-webkit-appearance "button"
+     ;; Change font properties to `inherit` in Safari.
+     :font "inherit"}
+
+    ;; Add the correct display in Edge, IE 10+, and Firefox.
+    :details {:display "block"}
+
+    ;; Add the correct display in all browsers.
+    :summary {:display "list-item"}
+
+    ;; Add the correct display in IE 10+.
+    :template {:display "none"}
+
+    ;; Add the correct display in IE 10.
+    (keyword "[hidden]")  {:display "none"}))
+
