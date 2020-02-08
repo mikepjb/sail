@@ -12,6 +12,7 @@
   (if (contains? #{:html :body :main :h1 :h2 :h3 :h4 :h5 :h6 
                    :section :nav :header :footer :hr :pre :a
                    :b :strong :code :kbd :samp :small :sub :sup :img
+                   :svg :video :canvas :audio :iframe :embed :object
                    :button :input :optgroup :select :textarea
                    :fieldSet :legend :progress :details :summary
                    :template :* :blockquote :dl :dd :tr :td :thead
@@ -37,6 +38,16 @@
                    (keyword "[type=\"submit\"]:-moz-focusring")
                    (keyword "[type=\"number\"]::-webkit-inner-spin-button")
                    (keyword "[type=\"number\"]::-webkit-outer-spin-button")
+                   (keyword "input::-webkit-input-placeholder")
+                   (keyword "textarea::-webkit-input-placeholder")
+                   (keyword "input::-moz-placeholder")
+                   (keyword "textarea::-moz-placeholder")
+                   (keyword "input:-ms-input-placeholder")
+                   (keyword "textarea:-ms-input-placeholder")
+                   (keyword "input::-ms-input-placeholder")
+                   (keyword "textarea::-ms-input-placeholder")
+                   (keyword "input::placeholder")
+                   (keyword "textarea::placeholder")
                    (keyword "abbr[title]")} (keyword n))
     n (str "." n)))
 

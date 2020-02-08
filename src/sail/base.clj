@@ -59,7 +59,40 @@
 
     :textarea {:resize "vertical"}
 
-    ;; when does reset finish?
-    ])
+
+    ;; TODO potential autoprefixing?
+    [(keyword "input::-webkit-input-placeholder")
+     (keyword "textarea::-webkit-input-placeholder")] {:color (:gray-500 palette)}
+
+    [(keyword "input::-moz-placeholder")
+     (keyword "textarea::-moz-placeholder")] {:color (:gray-500 palette)}
+
+    [(keyword "input:-ms-input-placeholder")
+     (keyword "textarea:-ms-input-placeholder")] {:color (:gray-500 palette)}
+
+    [(keyword "input::-ms-input-placeholder")
+     (keyword "textarea::-ms-input-placeholder")] {:color (:gray-500 palette)}
+
+    [(keyword "input::placeholder")
+     (keyword "textarea::placeholder")] {:color (:gray-500 palette)}
+
+    [:button (keyword "[role=\"button\"]")] {:cursor "pointer"}
+
+    :table {:border-collapse "collapse"}
+
+    [:h1 :h2 :h3 :h4 :h5 :h6] {:font-size "inherit" :font-weight "inherit"}
+
+    :a {:color "inherit" :text-decoration "inherit"} 
+
+    [:button :input :optgroup :select :textarea] {:padding 0
+                                                  :line-height "inherit"
+                                                  :color "inherit"}
+
+    [:pre :code :kbd :samp] {:font-family "Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"}
+
+    [:img :svg :video :canvas :audio :iframe :embed :object]
+    {:display "block" :vertical-align "middle"}
+
+    [:img :video] {:max-width "100%" :height "auto"}])
 
 (def base (into base-reset custom-reset))

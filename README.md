@@ -56,6 +56,9 @@ Originally I used array-maps to persist order and keep selectors/operators as
 maps but as they get bigger, grouping the array-maps revert to hash maps.
 Switching to vectors seemed the easier choice.
 
+L600 in full default tailwind.css is where I consider base to end and
+components to begin, when .container is first defined.
+
 ## Reference
 
 ;; npm view normalize.css version == 8.0.1
