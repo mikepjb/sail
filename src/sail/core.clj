@@ -63,3 +63,11 @@
   (spit "generated-style.css" (style->string all)))
 
 (generate-styles)
+
+;; TODO use this for dead code elimination
+;; https://clojureverse.org/t/list-all-unique-keywords-in-current-project/4024/5
+;; loads all keywords
+#_(let [f (.getDeclaredField clojure.lang.Keyword "table")]
+    (.setAccessible f true)
+    (map #(.get %) (vals (.get f nil))))
+
