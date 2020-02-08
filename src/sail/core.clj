@@ -9,7 +9,8 @@
   "include . for class names, ignore for reserved words like 'html'"
   [n]
   (if (contains? #{:html :body :main :h1 :h2 :h3 :h4 :h5 :h6 
-                   :section :nav :header :footer :hr} (keyword n))
+                   :section :nav :header :footer :hr :pre :a
+                   (keyword "abbr[title]")} (keyword n))
     n (str "." n)))
 
 (defn style->string [smap]
@@ -46,8 +47,17 @@
         :box-sizing "content-box"
         :height 0
         ;; Show the overflow in Edge and IE.
-        :overflow "visible"
-        }
+        :overflow "visible"}
+
+   :pre {;; Correct the inheritance and scaling of font size in all browsers.
+         :font-family "monospace, monospace"
+         ;; Correct the odd `em` font sizing in all browsers.
+         :font-size "1em"}
+
+   ;; Remove the gray background on active links in IE 10.
+   :a {:background-color "transparent"}
+
+   "abbr[title]" {:border-bottom "none"}
    })
 
 (style->string normalize)
