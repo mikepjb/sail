@@ -1,6 +1,6 @@
 # sail
 
-Use tailwind css classes in Clojure.
+Use Tailwind CSS classes in Clojure, batteries included.
 
 ## why?
 
@@ -49,6 +49,12 @@ I love to use.**
 
 `[sail "0.1.0"]`
 `{sail {:mvn/version "0.1.0"}}`
+
+## Implementation notes
+
+Originally I used array-maps to persist order and keep selectors/operators as
+maps but as they get bigger, grouping the array-maps revert to hash maps.
+Switching to vectors seemed the easier choice.
 
 ## Reference
 

@@ -1,8 +1,8 @@
-(ns sail.tailwind
+(ns sail.components
   (:require [sail.color :refer [palette color-class]]))
 
 (def custom-reset
-  (array-map
+  [
     :html {;; Use the system font stack as a sane default.
            :font-family "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
            ;; Use Tailwind's default "normal" line-height so the user isn't forced
@@ -22,7 +22,7 @@
     :textarea {:resize "vertical"}
 
     ;; when does reset finish?
-    ))
+    ])
 
 ;; https://clojureverse.org/t/list-all-unique-keywords-in-current-project/4024/5
 ;; loads all keywords
@@ -59,4 +59,4 @@
 ;; (map (fn [ck] (str ".bg-" (name ck) "{" "background-color:" (get palette ck) ";}"))
 ;;   [:white :black :gray-100 :gray-200])
 
-(def tailwind custom-reset)
+(def components custom-reset)

@@ -2,7 +2,7 @@
 
 (def normalize
   "Transcribed from github.com/necolas/normalize.css, retaining MIT license."
-  (array-map
+  [
     :html
     {;; Correct the line height in all browsers.
      :line-height 1.15
@@ -153,5 +153,5 @@
     :template {:display "none"}
 
     ;; Add the correct display in IE 10.
-    (keyword "[hidden]")  {:display "none"}))
+    (keyword "[hidden]")  {:display "none"}])
 

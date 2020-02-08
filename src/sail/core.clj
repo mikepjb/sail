@@ -2,7 +2,7 @@
   (:require [clojure.string]
             [sail.normalize :refer [normalize]]
             [sail.base :refer [base]]
-            [sail.tailwind :refer [tailwind]]))
+            [sail.components :refer [components]]))
 
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
@@ -53,19 +53,13 @@
       (if (map? v)
         (str output-string (->selector k) "{" (style->string v) "}")
         (str output-string (name k) ":" v ";")))
-    "" smap))
+    "" (if (map? smap) smap (partition 2 smap))))
 
-;; debug all
-;; works.. but does not persist order
-;; (style->string (reduce into (array-map) (reverse [normalize base])))
+(type (into base normalize))
 
-;; (style->string base)
-(style->string tailwind)
-
-;; debug single
-;; (style->string normalize)
+(def all (reduce into [normalize base components]))
 
 (defn generate-styles []
-  (spit "generated-style.css" (style->string normalize)))
+  (spit "generated-style.css" (style->string all)))
 
 (generate-styles)

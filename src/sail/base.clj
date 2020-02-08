@@ -4,7 +4,7 @@
 ;; assume this is what happens when you call @tailwind base; for now.
 
 (def base
-  (array-map
+  [
     :html {;; Prevent padding and border from affecting element width https://goo.gl/pYtbK7
            :box-sizing "border-box"
            ;; Change the default font family in all browsers (opinionated)
@@ -35,4 +35,5 @@
 
     :fieldSet {:margin 0 :padding 0}
 
-    [:ol :ul] {:list-style "none" :margin 0 :padding 0}))
+    [:ol :ul] {:list-style "none" :margin 0 :padding 0}
+    ])
