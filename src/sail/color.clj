@@ -16,9 +16,7 @@
 
 (defn color-class [prefix property]
   "Generates the css classes for a given property, for all colors."
-  (reduce
-    str
-    (map
-      (fn [[color-key hex]]
-        (str "." prefix "-" (name color-key) "{"
-             property ":" hex ";}")) palette)))
+  (reduce (fn [coll [color hex]]
+            (into coll [(keyword (str prefix "-" (name color)))
+                        {(keyword property) hex}]))
+          [] palette))

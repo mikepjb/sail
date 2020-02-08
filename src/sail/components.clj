@@ -1,7 +1,23 @@
 (ns sail.components
   (:require [sail.color :refer [palette color-class]]))
 
-(def components [])
+(def main ;; for lack of a better name..
+  [;; TODO skipped L602 .container and media queries 
+   ;; TODO skipped sr-only
+   :appearance-none
+   {:-webkit-appearance "none"
+    :-moz-appearance "none"
+    :appearance "none"}
+
+   :bg-fixed {:background-attachment "fixed"}
+   :bg-local {:background-attachment "local"}
+   :bg-scroll {:background-attachment "scroll"}
+   :bg-transparent {:background-attachment "transparent"}
+   ])
+
+(def components
+  (into main
+        (color-class "bg" "background-color")))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
 ;; abstract this work here too to keep things DRY.
@@ -31,5 +47,3 @@
 
 ;; (map (fn [ck] (str ".bg-" (name ck) "{" "background-color:" (get palette ck) ";}"))
 ;;   [:white :black :gray-100 :gray-200])
-
-(def components custom-reset)

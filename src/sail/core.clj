@@ -22,6 +22,7 @@
                    (keyword "[type=\"checkbox\"]")
                    (keyword "[type=\"radio\"]")
                    (keyword "[type=\"button\"]")
+                   (keyword "[role=\"button\"]")
                    (keyword "[type=\"reset\"]")
                    (keyword "[type=\"submit\"]")
                    (keyword "[type=\"search\"]")
