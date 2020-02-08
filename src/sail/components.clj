@@ -149,6 +149,21 @@
    :cursor-move {:cursor "move"}
    :cursor-not-allowed {:cursor "not-allowed"}])
 
+(def display
+  [:block {:display "block"}
+   :inline-block {:display "inline-block"}
+   :inline {:display "inline"}
+   ;; TODO Vanilla output includes "display: -webkit-box" alongside "display:
+   ;; flex" but we have commited to writing properties as a map which won't
+   ;; allow this. Ignoring for now as display: flex seems to be well supported.
+   ;; Quick search shows that even IE 10 supports 2012 syntax.
+   :flex {:display "flex"}
+   :inline-flex {:display "inline-flex"}
+   :table {:display "table"}
+   :table-row {:display "table-row"}
+   :table-cell {:display "table-cell"}
+   ])
+
 ;; (defn with-media-query)
 (defn with-pseudo-class
   "Set a collection of rules to work for a given pseudo class"
