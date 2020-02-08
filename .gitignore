@@ -1,2 +1,5 @@
 .cpcache/
 .nrepl-port
+pom.xml
+sail.jar
+target/

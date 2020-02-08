@@ -13,8 +13,6 @@
           (str output-string "." (name k) "{" (style->string v) "}"))) 
       "" smap))
 
-(style->string sample-style-map)
-
 (def sample-output
   ".m-2{margin: 0.25rem;}")
 
