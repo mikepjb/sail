@@ -15,9 +15,23 @@
    :bg-transparent {:background-attachment "transparent"}
    ])
 
+;; (defn with-media-query)
+(defn with-pseudo-class
+  "Set a collection of rules to work for a given pseudo class"
+  [class-name css-rules]
+  (reduce
+    (fn [coll [k v]]
+      (into coll [(keyword (str class-name ":" (name k) ":" class-name)) v]))
+    [] (partition 2 css-rules)))
+
 (def components
-  (into main
-        (color-class "bg" "background-color")))
+  (reduce into [main
+                (color-class "bg" "background-color")
+                (with-pseudo-class "hover" (color-class "bg" "background-color"))
+                (with-pseudo-class "focus" (color-class "bg" "background-color"))
+                ;; TODO active is disabled by default on vanilla Tailwind
+                (with-pseudo-class "active" (color-class "bg" "background-color"))
+                ]))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
 ;; abstract this work here too to keep things DRY.
