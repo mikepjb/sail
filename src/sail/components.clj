@@ -140,6 +140,15 @@
            :border-b {:border-bottom-width "1px"}
            :border-l {:border-left-width "1px"}]))
 
+(def cursor
+  [:cursor-auto {:cursor "auto"}
+   :cursor-default {:cursor "default"}
+   :cursor-pointer {:cursor "pointer"}
+   :cursor-wait {:cursor "wait"}
+   :cursor-text {:cursor "text"}
+   :cursor-move {:cursor "move"}
+   :cursor-not-allowed {:cursor "not-allowed"}])
+
 ;; (defn with-media-query)
 (defn with-pseudo-class
   "Set a collection of rules to work for a given pseudo class"
@@ -158,6 +167,7 @@
                 ;; (with-pseudo-class "active" (color-class "bg" "background-color"))
                 background
                 border
+                cursor
                 ]))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
