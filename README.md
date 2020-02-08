@@ -17,6 +17,9 @@ purgecss.
 move makes the tools provided by tailwind available to Clojure projects as a
 library, without the you (the library user) having to depend on npm/node. 
 
+**Sail is essentially a Clojure port of the Tailwind CSS workflow/build system
+I love to use.**
+
 ## TODO
 
 - [ ] consume all classes from tailwindcss npm (make this easy to re-run as new

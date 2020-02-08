@@ -10,6 +10,7 @@
   [n]
   (if (contains? #{:html :body :main :h1 :h2 :h3 :h4 :h5 :h6 
                    :section :nav :header :footer :hr :pre :a
+                   :b :strong
                    (keyword "abbr[title]")} (keyword n))
     n (str "." n)))
 
@@ -18,11 +19,11 @@
     (fn [output-string [k v]]
       (if (map? v)
         (str output-string (-> k name prefix) "{" (style->string v) "}")
-        (str output-string (name k) ":" v ";"))) 
-    "" smap))
 
-(def sample-output
-  ".m-2{margin: 0.25rem;}")
+        ;; -> if (vec? k) then do seq the value
+        (str output-string (name k) ":" v ";")
+        ))
+    "" smap))
 
 (def normalize
   "transcribed from github.com/necolas/normalize.css, retaining MIT license"
@@ -57,10 +58,20 @@
    ;; Remove the gray background on active links in IE 10.
    :a {:background-color "transparent"}
 
-   "abbr[title]" {:border-bottom "none"}
+   "abbr[title]" {;; Remove the bottom border in Chrome 57-
+                  :border-bottom "none"
+                  ;; Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+                  ;; TODO you can't have duplicate keys in a map, I didn't know
+                  ;; this was a thing in CSS. Is it?
+                  ;; :text-decoration "underline"
+                  :text-decoration "underline dotted"
+                  }
+
+   ;; Add the correct font weight in Chrome, Edge, and Safari.
+   [:b :strong] {:font-weight "bolder"}
    })
 
-(style->string normalize)
+;; (style->string normalize)
 
 (defn generate-styles []
   (spit "generated-style.css" sample-output))
