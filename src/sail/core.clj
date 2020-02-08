@@ -1,6 +1,7 @@
 (ns sail.core
   (:require [clojure.string]
-            [sail.normalize :refer [normalize]]))
+            [sail.normalize :refer [normalize]]
+            [sail.base :refer [base]]))
 
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
@@ -12,7 +13,10 @@
                    :b :strong :code :kbd :samp :small :sub :sup :img
                    :button :input :optgroup :select :textarea
                    :fieldSet :legend :progress :details :summary
-                   :template
+                   :template :* :blockquote :dl :dd :tr :td :thead
+                   :tbody :table :figure :p :button:focus :ol :ul :li
+                   (keyword "::before")
+                   (keyword "::after")
                    (keyword "[type=\"checkbox\"]")
                    (keyword "[type=\"radio\"]")
                    (keyword "[type=\"button\"]")
@@ -50,7 +54,14 @@
         (str output-string (name k) ":" v ";")))
     "" smap))
 
-(style->string normalize)
+;; debug all
+;; works.. but does not persist order
+;; (style->string (reduce into (array-map) (reverse [normalize base])))
+
+(style->string base)
+
+;; debug single
+;; (style->string normalize)
 
 (defn generate-styles []
   (spit "generated-style.css" (style->string normalize)))
