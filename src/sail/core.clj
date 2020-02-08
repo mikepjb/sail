@@ -1,10 +1,5 @@
 (ns sail.core)
 
-(def sample-style-map
-  {:html
-   {:line-height "1.15"
-    :-webkit-text-size-adjust "100%"}})
-
 (defn prefix
   "include . for class names, ignore for reserved words like 'html'"
   [n]
@@ -74,9 +69,6 @@
 ;; (style->string normalize)
 
 (defn generate-styles []
-  (spit "generated-style.css" sample-output))
+  (spit "generated-style.css" (style->string normalize)))
 
 ;; (generate-styles)
-
-;; npm view normalize.css version == 8.0.1
-;; npm view tailwindcss version == 1.2.0

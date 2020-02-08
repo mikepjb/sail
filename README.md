@@ -43,3 +43,8 @@ I love to use.**
 
 - generate your own css file based on a similar system.
 - compare it to the minified distributed version for comparison of types.
+
+## Reference
+
+;; npm view normalize.css version == 8.0.1
+;; npm view tailwindcss version == 1.2.0
