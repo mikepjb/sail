@@ -44,6 +44,11 @@ I love to use.**
 - generate your own css file based on a similar system.
 - compare it to the minified distributed version for comparison of types.
 
+## Usage [work in progress]
+
+`[sail "0.1.0"]`
+`{sail {:mvn/version "0.1.0"}}`
+
 ## Reference
 
 ;; npm view normalize.css version == 8.0.1
