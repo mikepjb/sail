@@ -59,6 +59,13 @@ Switching to vectors seemed the easier choice.
 L600 in full default tailwind.css is where I consider base to end and
 components to begin, when .container is first defined.
 
+It looks as though Safair only supports old flex syntax e.g -webkit-box. This
+means that multiple keys of the same name are required, where the most modern
+sits at the bottom.
+
+display: -webkit-inline-box;
+display: inline-flex;
+
 ## Reference
 
 ;; npm view normalize.css version == 8.0.1

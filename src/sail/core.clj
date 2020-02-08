@@ -62,7 +62,7 @@
 (defn style->string [smap]
   (reduce
     (fn [output-string [k v]]
-      (if (map? v)
+      (if (or (map? v) (vector? v))
         (str output-string (->selector k) "{" (style->string v) "}")
         (str output-string (name k) ":" v ";")))
     "" (if (map? smap) smap (partition 2 smap))))

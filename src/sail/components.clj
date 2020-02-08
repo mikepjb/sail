@@ -37,108 +37,108 @@
 
 (def border
   (reduce into
-          [:border-collapse {:border-collapse "collapse"}
-           :border-seperate {:border-collapse "seperate"}
-           :border-transparent {:border-collapse "transparent"}]
-          (color-class "border" "border-color")
-          (with-pseudo-class "hover" (color-class "border" "border-color"))
-          (with-pseudo-class "focus" (color-class "border" "border-color"))
-          [:rounded-none {:border-radius "none"}
-           ;; TODO rounded-sm is based on sm being a particular value
-           ;; treat like color with palette?
-           :rounded-sm {:border-radius "0.125rem"}
-           :rounded {:border-radius "0.25rem"}
-           :rounded-lg {:border-radius "0.5rem"}
-           :rounded-full {:border-radius "9999px"}
-           :rounded-t-none {:border-top-left-radius 0
-                            :border-top-right-radius 0}
-           :rounded-b-none {:border-bottom-left-radius 0
-                            :border-bottom-right-radius 0}
-           :rounded-l-none {:border-top-left-radius 0
-                            :border-bottom-left-radius 0}
-           :rounded-r-none {:border-top-right-radius 0
-                            :border-bottom-right-radius 0}
-           :rounded-t-sm {:border-top-left-radius "0.125rem"
-                          :border-top-right-radius "0.125rem"}
-           :rounded-b-sm {:border-bottom-left-radius "0.125rem"
-                          :border-bottom-right-radius "0.125rem"}
-           :rounded-l-sm {:border-top-left-radius "0.125rem"
-                          :border-bottom-left-radius "0.125rem"}
-           :rounded-r-sm {:border-top-right-radius "0.125rem"
-                          :border-bottom-right-radius "0.125rem"}
-           :rounded-t {:border-top-left-radius "0.25rem"
-                       :border-top-right-radius "0.25rem"}
-           :rounded-b {:border-bottom-left-radius "0.25rem"
-                       :border-bottom-right-radius "0.25rem"}
-           :rounded-l {:border-top-left-radius "0.25rem"
-                       :border-bottom-left-radius "0.25rem"}
-           :rounded-r {:border-top-right-radius "0.25rem"
-                       :border-bottom-right-radius "0.25rem"}
-           :rounded-t-lg {:border-top-left-radius "0.5rem"
-                          :border-top-right-radius "0.5rem"}
-           :rounded-b-lg {:border-bottom-left-radius "0.5rem"
-                          :border-bottom-right-radius "0.5rem"}
-           :rounded-l-lg {:border-top-left-radius "0.5rem"
-                          :border-bottom-left-radius "0.5rem"}
-           :rounded-r-lg {:border-top-right-radius "0.5rem"
-                          :border-bottom-right-radius "0.5rem"}
-           :rounded-t-full {:border-top-left-radius "9999px"
-                            :border-top-right-radius "9999px"}
-           :rounded-b-full {:border-bottom-left-radius "9999px"
-                            :border-bottom-right-radius "9999px"}
-           :rounded-l-full {:border-top-left-radius "9999px"
-                            :border-bottom-left-radius "9999px"}
-           :rounded-r-full {:border-top-right-radius "9999px"
-                            :border-bottom-right-radius "9999px"}
-           :rounded-tl-none {:border-top-left-radius "0"}
-           :rounded-tr-none {:border-top-right-radius "0"}
-           :rounded-bl-none {:border-bottom-left-radius "0"}
-           :rounded-br-none {:border-bottom-right-radius "0"}
-           :rounded-tl-sm {:border-top-left-radius "0.125rem"}
-           :rounded-tr-sm {:border-top-right-radius "0.125rem"}
-           :rounded-bl-sm {:border-bottom-left-radius "0.125rem"}
-           :rounded-br-sm {:border-bottom-right-radius "0.125rem"}
-           :rounded-tl {:border-top-left-radius "0.25rem"}
-           :rounded-tr {:border-top-right-radius "0.25rem"}
-           :rounded-bl {:border-bottom-left-radius "0.25rem"}
-           :rounded-br {:border-bottom-right-radius "0.25rem"}
-           :rounded-tl-lg {:border-top-left-radius "0.5rem"}
-           :rounded-tr-lg {:border-top-right-radius "0.5rem"}
-           :rounded-bl-lg {:border-bottom-left-radius "0.5rem"}
-           :rounded-br-lg {:border-bottom-right-radius "0.5rem"}
-           :rounded-tl-full {:border-top-left-radius "9999px"}
-           :rounded-tr-full {:border-top-right-radius "9999px"}
-           :rounded-bl-full {:border-bottom-left-radius "9999px"}
-           :rounded-br-full {:border-bottom-right-radius "9999px"}
-           :border-solid {:border-style "solid"}
-           :border-dashed {:border-style "dashed"}
-           :border-dotted {:border-style "dotted"}
-           :border-double {:border-style "double"}
-           :border-none {:border-style "none"}
-           :border-0 {:border-width "0"}
-           :border-2 {:border-width "2px"}
-           :border-4 {:border-width "4px"}
-           :border-8 {:border-width "8px"}
-           :border-t-0 {:border-top-width "0"}
-           :border-r-0 {:border-right-width "0"}
-           :border-b-0 {:border-bottom-width "0"}
-           :border-l-0 {:border-left-width "0"}
-           :border-t-2 {:border-top-width "2px"}
-           :border-r-2 {:border-right-width "2px"}
-           :border-b-2 {:border-bottom-width "2px"}
-           :border-l-2 {:border-left-width "2px"}
-           :border-t-4 {:border-top-width "4px"}
-           :border-r-4 {:border-right-width "4px"}
-           :border-b-4 {:border-bottom-width "4px"}
-           :border-l-4 {:border-left-width "4px"}
-           :border-t-8 {:border-top-width "8px"}
-           :border-r-8 {:border-right-width "8px"}
-           :border-b-8 {:border-bottom-width "8px"}
-           :border-l-8 {:border-left-width "8px"}
-           :border-t {:border-top-width "1px"}
-           :border-r {:border-right-width "1px"}
-           :border-b {:border-bottom-width "1px"}
-           :border-l {:border-left-width "1px"}]))
+          [[:border-collapse {:border-collapse "collapse"}
+            :border-seperate {:border-collapse "seperate"}
+            :border-transparent {:border-collapse "transparent"}]
+           (color-class "border" "border-color")
+           (with-pseudo-class "hover" (color-class "border" "border-color"))
+           (with-pseudo-class "focus" (color-class "border" "border-color"))
+           [:rounded-none {:border-radius "none"}
+            ;; TODO rounded-sm is based on sm being a particular value
+            ;; treat like color with palette?
+            :rounded-sm {:border-radius "0.125rem"}
+            :rounded {:border-radius "0.25rem"}
+            :rounded-lg {:border-radius "0.5rem"}
+            :rounded-full {:border-radius "9999px"}
+            :rounded-t-none {:border-top-left-radius 0
+                             :border-top-right-radius 0}
+            :rounded-b-none {:border-bottom-left-radius 0
+                             :border-bottom-right-radius 0}
+            :rounded-l-none {:border-top-left-radius 0
+                             :border-bottom-left-radius 0}
+            :rounded-r-none {:border-top-right-radius 0
+                             :border-bottom-right-radius 0}
+            :rounded-t-sm {:border-top-left-radius "0.125rem"
+                           :border-top-right-radius "0.125rem"}
+            :rounded-b-sm {:border-bottom-left-radius "0.125rem"
+                           :border-bottom-right-radius "0.125rem"}
+            :rounded-l-sm {:border-top-left-radius "0.125rem"
+                           :border-bottom-left-radius "0.125rem"}
+            :rounded-r-sm {:border-top-right-radius "0.125rem"
+                           :border-bottom-right-radius "0.125rem"}
+            :rounded-t {:border-top-left-radius "0.25rem"
+                        :border-top-right-radius "0.25rem"}
+            :rounded-b {:border-bottom-left-radius "0.25rem"
+                        :border-bottom-right-radius "0.25rem"}
+            :rounded-l {:border-top-left-radius "0.25rem"
+                        :border-bottom-left-radius "0.25rem"}
+            :rounded-r {:border-top-right-radius "0.25rem"
+                        :border-bottom-right-radius "0.25rem"}
+            :rounded-t-lg {:border-top-left-radius "0.5rem"
+                           :border-top-right-radius "0.5rem"}
+            :rounded-b-lg {:border-bottom-left-radius "0.5rem"
+                           :border-bottom-right-radius "0.5rem"}
+            :rounded-l-lg {:border-top-left-radius "0.5rem"
+                           :border-bottom-left-radius "0.5rem"}
+            :rounded-r-lg {:border-top-right-radius "0.5rem"
+                           :border-bottom-right-radius "0.5rem"}
+            :rounded-t-full {:border-top-left-radius "9999px"
+                             :border-top-right-radius "9999px"}
+            :rounded-b-full {:border-bottom-left-radius "9999px"
+                             :border-bottom-right-radius "9999px"}
+            :rounded-l-full {:border-top-left-radius "9999px"
+                             :border-bottom-left-radius "9999px"}
+            :rounded-r-full {:border-top-right-radius "9999px"
+                             :border-bottom-right-radius "9999px"}
+            :rounded-tl-none {:border-top-left-radius "0"}
+            :rounded-tr-none {:border-top-right-radius "0"}
+            :rounded-bl-none {:border-bottom-left-radius "0"}
+            :rounded-br-none {:border-bottom-right-radius "0"}
+            :rounded-tl-sm {:border-top-left-radius "0.125rem"}
+            :rounded-tr-sm {:border-top-right-radius "0.125rem"}
+            :rounded-bl-sm {:border-bottom-left-radius "0.125rem"}
+            :rounded-br-sm {:border-bottom-right-radius "0.125rem"}
+            :rounded-tl {:border-top-left-radius "0.25rem"}
+            :rounded-tr {:border-top-right-radius "0.25rem"}
+            :rounded-bl {:border-bottom-left-radius "0.25rem"}
+            :rounded-br {:border-bottom-right-radius "0.25rem"}
+            :rounded-tl-lg {:border-top-left-radius "0.5rem"}
+            :rounded-tr-lg {:border-top-right-radius "0.5rem"}
+            :rounded-bl-lg {:border-bottom-left-radius "0.5rem"}
+            :rounded-br-lg {:border-bottom-right-radius "0.5rem"}
+            :rounded-tl-full {:border-top-left-radius "9999px"}
+            :rounded-tr-full {:border-top-right-radius "9999px"}
+            :rounded-bl-full {:border-bottom-left-radius "9999px"}
+            :rounded-br-full {:border-bottom-right-radius "9999px"}
+            :border-solid {:border-style "solid"}
+            :border-dashed {:border-style "dashed"}
+            :border-dotted {:border-style "dotted"}
+            :border-double {:border-style "double"}
+            :border-none {:border-style "none"}
+            :border-0 {:border-width "0"}
+            :border-2 {:border-width "2px"}
+            :border-4 {:border-width "4px"}
+            :border-8 {:border-width "8px"}
+            :border-t-0 {:border-top-width "0"}
+            :border-r-0 {:border-right-width "0"}
+            :border-b-0 {:border-bottom-width "0"}
+            :border-l-0 {:border-left-width "0"}
+            :border-t-2 {:border-top-width "2px"}
+            :border-r-2 {:border-right-width "2px"}
+            :border-b-2 {:border-bottom-width "2px"}
+            :border-l-2 {:border-left-width "2px"}
+            :border-t-4 {:border-top-width "4px"}
+            :border-r-4 {:border-right-width "4px"}
+            :border-b-4 {:border-bottom-width "4px"}
+            :border-l-4 {:border-left-width "4px"}
+            :border-t-8 {:border-top-width "8px"}
+            :border-r-8 {:border-right-width "8px"}
+            :border-b-8 {:border-bottom-width "8px"}
+            :border-l-8 {:border-left-width "8px"}
+            :border-t {:border-top-width "1px"}
+            :border-r {:border-right-width "1px"}
+            :border-b {:border-bottom-width "1px"}
+            :border-l {:border-left-width "1px"}]]))
 
 (def cursor
   [:cursor-auto {:cursor "auto"}
@@ -153,15 +153,13 @@
   [:block {:display "block"}
    :inline-block {:display "inline-block"}
    :inline {:display "inline"}
-   ;; TODO Vanilla output includes "display: -webkit-box" alongside "display:
-   ;; flex" but we have commited to writing properties as a map which won't
-   ;; allow this. Ignoring for now as display: flex seems to be well supported.
-   ;; Quick search shows that even IE 10 supports 2012 syntax.
-   :flex {:display "flex"}
-   :inline-flex {:display "inline-flex"}
+   :flex [:display "-webkit-box" :display "flex"]
+   :inline-flex [:display "-webkit-inline-box" :display "inline-flex"]
    :table {:display "table"}
    :table-row {:display "table-row"}
    :table-cell {:display "table-cell"}
+   :hidden {:display "none"}
+   :flex-row {:display "flex-row"}
    ])
 
 ;; (defn with-media-query)
@@ -183,6 +181,7 @@
                 background
                 border
                 cursor
+                display
                 ]))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
