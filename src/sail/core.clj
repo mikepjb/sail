@@ -6,15 +6,19 @@
     :-webkit-text-size-adjust "100%"}})
 
 (defn style->string [smap]
-    (reduce
-      (fn [output-string [k v]]
-        (if (string? v)
-          (str output-string (name k) ":" v ";")
-          (str output-string "." (name k) "{" (style->string v) "}"))) 
-      "" smap))
+  (reduce
+    (fn [output-string [k v]]
+      (if (map? v)
+        (str output-string "." (name k) "{" (style->string v) "}")
+        (str output-string (name k) ":" v ";"))) 
+    "" smap))
 
 (def sample-output
   ".m-2{margin: 0.25rem;}")
+
+(def normalize
+  {:html
+   {:line-height 1.15}})
 
 (defn generate-styles []
   (spit "generated-style.css" sample-output))
