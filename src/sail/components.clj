@@ -261,6 +261,17 @@
             (into coll [(keyword (str "font-" (name k)))
                         {:line-height v}])) [] leading-table))
 
+(defn tracking-class []
+  (reduce (fn [coll [k v]]
+            (into coll [(keyword (str "tracking-" (name k)))
+                        {:letter-spacing v}])) []
+          {:tighter "-0.05em"
+           :tight "-0.025em"
+           :normal "0"
+           :wide "0.025em"
+           :wider "0.05em"
+           :widest "0.1em"}))
+
 (def font
   (reduce into
           [[:font-sans "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
@@ -269,7 +280,8 @@
            (weight-class)
            (with-pseudo-class "hover" (weight-class))
            (with-pseudo-class "focus" (weight-class))
-           (leading-class)]))
+           (leading-class)
+           (tracking-class)]))
 
 (def spacing-table
   {:0 "0"
@@ -350,6 +362,43 @@
            (spacing-class "pr" "padding-right")
            (spacing-class "pl" "padding-left")
            (spacing-class "pb" "padding-bottom")
+           (spacing-class "w" "width")
+           [(keyword "w-1/2") {:width "50%"}
+            (keyword "w-1/3") {:width "33.333333%"}
+            (keyword "w-2/3") {:width "66.666667%"}
+            (keyword "w-1/4") {:width "25%"}
+            (keyword "w-2/4") {:width "50%"}
+            (keyword "w-3/4") {:width "75%"}
+            (keyword "w-1/5") {:width "20%"}
+            (keyword "w-2/5") {:width "40%"}
+            (keyword "w-3/5") {:width "60%"}
+            (keyword "w-4/5") {:width "80%"}
+            (keyword "w-1/6") {:width "16.666667%"}
+            (keyword "w-2/6") {:width "33.333333%"}
+            (keyword "w-3/6") {:width "50%"}
+            (keyword "w-4/6") {:width "66.666667%"}
+            (keyword "w-5/6") {:width "83.333333%"}
+            (keyword "w-1/12") {:width "8.333333%"}
+            (keyword "w-2/12") {:width "16.666667%"}
+            (keyword "w-3/12") {:width "25%"}
+            (keyword "w-4/12") {:width "33.333333%"}
+            (keyword "w-5/12") {:width "41.666667%"}
+            (keyword "w-6/12") {:width "50%"}
+            (keyword "w-7/12") {:width "58.333333%"}
+            (keyword "w-8/12") {:width "66.666667%"}
+            (keyword "w-9/12") {:width "75%"}
+            (keyword "w-10/12") {:width "83.333333%"}
+            (keyword "w-11/12") {:width "91.666667%"}
+            :w-full {:width "100%"}
+            :w-screen {:width "100vw"}
+            :z-0 {:z-index 0}
+            :z-10 {:z-index 10}
+            :z-20 {:z-index 20}
+            :z-30 {:z-index 30}
+            :z-40 {:z-index 40}
+            :z-50 {:z-index 50}
+            :z-auto {:z-index "auto"}
+            :smooth-scroll {:scroll-behaviour "smooth"}]
            ;; TODO no placeholder for now, I don't use these classes
            ;; placeholder stuff from L5876 until L9592
            [:pointer-events-none {:pointer-events "none"}
@@ -393,6 +442,33 @@
    :shadow-outline {:box-shadow "0 0 0 3px rgba(66, 153, 225, 0.5)"}
    :shadow-none {:box-shadow "none"}])
 
+(def text-style
+  [:text-xs {:font-size "0.75rem"}
+   :text-sm {:font-size "0.875rem"}
+   :text-base {:font-size "1rem"}
+   :text-lg {:font-size "1.125rem"}
+   :text-xl {:font-size "1.25rem"}
+   :text-2xl {:font-size "1.5rem"}
+   :text-3xl {:font-size "1.875rem"}
+   :text-4xl {:font-size "2.25rem"}
+   :text-5xl {:font-size "3rem"}
+   :text-6xl {:font-size "4rem"}
+   :italic {:font-style "italic"}
+   :not-italic {:font-style "normal"}
+   :uppercase {:text-transform "uppercase"}
+   :lowercase {:text-transform "lowercase"}
+   :capitalize {:text-transform "capitalize"}
+   :normal-case {:text-transform "none"}
+   :underline {:text-decoration "underline"}
+   :line-through {:text-decoration "line-through"}
+   :no-underline {:text-decoration "none"}
+   ])
+
+(defn autoprefix [property value]
+  (reduce (fn [coll prefix]
+            (into coll {(keyword (str prefix property)) value}))
+          {} ["-webkit-" "-moz-" "-ms-" ""]))
+
 (def components
   (reduce into [main
                 (color-class "bg" "background-color")
@@ -428,7 +504,7 @@
                                       :object-position "right bottom"}
                  :object-right-top {:-o-object-position "right top"
                                       :object-position "right top"}
-                 :object-top {:-o-object-position "top" :object-position "top"}
+                 :object-top {:-o-object-position "top" :object-position "top"}]
                  opacity
                  (with-pseudo-class "hover" opacity)
                  (with-pseudo-class "focus" opacity)
@@ -447,39 +523,48 @@
                   :overflow-x-scroll {:overflow-x "scroll"}
                   :overflow-y-scroll {:overflow-y "scroll"}
                   :scrolling-touch {:-webkit-overflow-scrolling "touch"}
-                  :scrolling-auto {:-webkit-overflow-scrolling "auto"}
-                  ]
+                  :scrolling-auto {:-webkit-overflow-scrolling "auto"}]
                  shadow
                  (with-pseudo-class "hover" shadow)
                  (with-pseudo-class "focus" shadow)
-                 ]
-                ]))
-
-;; stopped at L487.. looks like the work of autoprefixer, I'd like to
-;; abstract this work here too to keep things DRY.
-
-;; TODO fill in the gap ...
-
-;; bg- begins @ L682
-
-;; (color-class "bg" "background-color")
-;; (color-class "hover:bg" "background-color") ;; TODO missing :hover suffix
-;; same for focus
-;; L1800 positioning
-;; L1890 border color
-;; (color-class "border" "border-color")
-;; hover + focus
-;; L3000 rounded/border work.
-;; L3300 cursors.
-;; L3350 display stuff block/inline/flex etc
-;; makes an interesting case for autoprefixer - value based not property based
-;; as I'm used to seeing.
-;; .flex {
-;;   display: -webkit-box;
-;;   display: flex;
-;; }
-;; (color-class "text" "color")
-
-
-;; (map (fn [ck] (str ".bg-" (name ck) "{" "background-color:" (get palette ck) ";}"))
-;;   [:white :black :gray-100 :gray-200])
+                 [:fill-current {:fill "currentColor"}
+                  :stroke-current {:stroke "currentColor"}
+                  :table-auto {:table-layout "auto"}
+                  :table-fixed {:table-layout "fixed"}
+                  :text-left {:text-align "left"}
+                  :text-center {:text-align "center"}
+                  :text-right {:text-align "right"}
+                  :text-justify {:text-align "justify"}
+                  :text-transparent {:color "transparent"}]
+                 (color-class "text" "color")
+                 (with-pseudo-class "hover" (color-class "text" "color"))
+                 (with-pseudo-class "focus" (color-class "text" "color"))
+                 text-style
+                 (with-pseudo-class "hover" text-style)
+                 (with-pseudo-class "focus" text-style)
+                 [:antialiased {:-webkit-font-smoothing "antialiased"
+                                :-moz-osx-font-smoothing "grayscale"}
+                  :subpixel-antialiased {:-webkit-font-smoothing "auto"
+                                         :-moz-osx-font-smoothing "auto"}
+                  :select-none (autoprefix "user-select" "none")
+                  :select-text (autoprefix "user-select" "text")
+                  :select-all (autoprefix "user-select" "all")
+                  :select-auto (autoprefix "user-select" "auto")
+                  :align-baseline {:vertical-align "baseline"}
+                  :align-top {:vertical-align "top"}
+                  :align-middle {:vertical-align "middle"}
+                  :align-bottom {:vertical-align "bottom"}
+                  :align-text-top {:vertical-align "text-top"}
+                  :align-text-bottom {:vertical-align "text-bottom"}
+                  :visible {:visibility "visible"}
+                  :invisible {:visibility "hidden"}
+                  :whitespace-normal {:white-space "normal"}
+                  :whitespace-no-wrap {:white-space "nowrap"}
+                  :whitespace-pre {:white-space "pre"}
+                  :whitespace-pre-line {:white-space "pre-line"}
+                  :whitespace-pre-wrap {:white-space "pre-wrap"}
+                  :break-normal {:overflow-wrap "normal" :word-break "normal"}
+                  :break-words {:overflow-wrap "break-word"}
+                  :break-all {:overflow-wrap "break-all"}
+                  :truncate {:overflow "hidden" :text-overflow "ellipsis" :white-space "nowrap"}
+                 ]]))

@@ -32,6 +32,11 @@ I love to use.**
 - [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
   - most likely a cljs npm language-server will do the trick.
   writing hiccup is important though for this workflow.)
+- [ ] add in all default colors
+- [ ] how to use guide
+- [ ] roadmap for development
+- [ ] clean up components code (mostly putting things under the correct names)
+- [ ] include placeholders classes
 
 ## Plan A
 
