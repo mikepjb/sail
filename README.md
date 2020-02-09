@@ -73,6 +73,14 @@ sits at the bottom.
 display: -webkit-inline-box;
 display: inline-flex;
 
+## Releasing
+
+```
+rm sail.jar
+clj -A:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
+mvn deploy
+```
+
 ## Reference
 
 ;; npm view normalize.css version == 8.0.1
