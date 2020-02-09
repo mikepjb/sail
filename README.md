@@ -58,7 +58,7 @@ I love to use.**
 `{sail {:mvn/version "0.3.0"}}`
 
 ```
-(require '[sail :as sail]')
+(require '[sail.core :as sail]')
 
 ;; generates all tailwind classes to use in development
 (sail/generate-styles "styles.gen.css")
