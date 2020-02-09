@@ -352,13 +352,46 @@
            (spacing-class "pb" "padding-bottom")
            ;; TODO no placeholder for now, I don't use these classes
            ;; placeholder stuff from L5876 until L9592
-           ]))
+           [:pointer-events-none {:pointer-events "none"}
+            :pointer-events-auto {:pointer-events "auto"}
+            :static {:position "static"}
+            :fixed {:position "fixed"}
+            :absolute {:position "absolute"}
+            :relative {:position "relative"}
+            :sticky [:position "-webkit-sticky" :position "sticky"]
+            :inset-auto {:top "auto" :right "auto" :bottom "auto" :left "auto"}
+            :inset-0 {:top 0 :right 0 :bottom 0 :left 0}
+            :inset-y-0 {:top 0 :bottom 0}
+            :inset-y-auto {:top "auto" :bottom "auto"}
+            :inset-x-auto {:right "auto" :left "auto"}
+            :top-0 {:top 0}
+            :right-0 {:right 0}
+            :bottom-0 {:bottom 0}
+            :left-0 {:left 0}
+            :top-auto {:top "auto"}
+            :right-auto {:right "auto"}
+            :bottom-auto {:bottom "auto"}
+            :left-auto {:left "auto"}
+            :resize-none {:resize "none"}
+            :resize-y {:resize "vertical"}
+            :resize-x {:resize "horizontal"}
+            :resize {:resize "both"}]]))
 
 (def opacity
   (reduce
     (fn [coll [k v]]
       (into coll [(str "opacity-" (name k)) {:opacity v}]))
     [] {:0 0 :25 0.25 :50 0.5 :75 0.75 :100 1}))
+
+(def shadow
+  [:shadow {:box-shadow "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"}
+   :shadow-md {:box-shadow "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"}
+   :shadow-lg {:box-shadow "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"}
+   :shadow-xl {:box-shadow "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"}
+   :shadow-2xl {:box-shadow "0 25px 50px -12px rgba(0, 0, 0, 0.25)"}
+   :shadow-inner {:box-shadow "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)"}
+   :shadow-outline {:box-shadow "0 0 0 3px rgba(66, 153, 225, 0.5)"}
+   :shadow-none {:box-shadow "none"}])
 
 (def components
   (reduce into [main
@@ -416,6 +449,9 @@
                   :scrolling-touch {:-webkit-overflow-scrolling "touch"}
                   :scrolling-auto {:-webkit-overflow-scrolling "auto"}
                   ]
+                 shadow
+                 (with-pseudo-class "hover" shadow)
+                 (with-pseudo-class "focus" shadow)
                  ]
                 ]))
 
