@@ -78,7 +78,7 @@
 
 (def all (reduce into [normalize base components]))
 
-(defn generate-styles []
+(defn generate-styles [path]
   (spit "generated-style.css"
         (str (style->string all)
              (with-responsive-prefix components "sm" "640px")
@@ -86,7 +86,7 @@
              (with-responsive-prefix components "sm" "1024px")
              (with-responsive-prefix components "sm" "1024px"))))
 
-(generate-styles)
+;; (generate-styles "styles.gen.css")
 
 ;; TODO use this for dead code elimination
 ;; https://clojureverse.org/t/list-all-unique-keywords-in-current-project/4024/5

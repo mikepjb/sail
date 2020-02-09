@@ -54,8 +54,17 @@ I love to use.**
 
 ## Usage [work in progress]
 
-`[sail "0.1.0"]`
-`{sail {:mvn/version "0.1.0"}}`
+`[sail "0.3.0"]`
+`{sail {:mvn/version "0.3.0"}}`
+
+```
+(require '[sail :as sail]')
+
+;; generates all tailwind classes to use in development
+(sail/generate-styles "styles.gen.css")
+
+;; currently no function to eliminate unused classes
+```
 
 ## Implementation notes
 
