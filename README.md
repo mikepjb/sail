@@ -22,6 +22,7 @@ I love to use.**
 
 ## TODO
 
+- [ ] ensure font-sans is prefixed as .font-sans
 - [ ] consume all classes from tailwindcss npm (make this easy to re-run as new
   versions are released)
 - [ ] autoprefix css rules that require it.
