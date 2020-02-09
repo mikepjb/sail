@@ -7,7 +7,7 @@
   [class-name css-rules]
   (reduce
     (fn [coll [k v]]
-      (into coll [(keyword (str class-name ":" (name k) ":" class-name)) v]))
+      (into coll [(keyword (str class-name "\\:" (name k) ":" class-name)) v]))
     [] (partition 2 css-rules)))
 
 
