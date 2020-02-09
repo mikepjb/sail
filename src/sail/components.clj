@@ -1,6 +1,16 @@
 (ns sail.components
   (:require [sail.color :refer [palette color-class]]))
 
+;; (defn with-media-query)
+(defn with-pseudo-class
+  "Set a collection of rules to work for a given pseudo class"
+  [class-name css-rules]
+  (reduce
+    (fn [coll [k v]]
+      (into coll [(keyword (str class-name ":" (name k) ":" class-name)) v]))
+    [] (partition 2 css-rules)))
+
+
 (def main ;; for lack of a better name..
   [;; TODO skipped L602 .container and media queries 
    ;; TODO skipped sr-only
@@ -261,15 +271,6 @@
            (with-pseudo-class "focus" (weight-class))
            (leading-class)]))
 
-;; (defn with-media-query)
-(defn with-pseudo-class
-  "Set a collection of rules to work for a given pseudo class"
-  [class-name css-rules]
-  (reduce
-    (fn [coll [k v]]
-      (into coll [(keyword (str class-name ":" (name k) ":" class-name)) v]))
-    [] (partition 2 css-rules)))
-
 (def spacing-table
   {:0 "0"
    :1 "0.25rem"
@@ -340,10 +341,13 @@
             :min-h-full {:min-height "100%"}
             :min-h-screen {:min-height "100vh"}
             :min-w-0 {:min-width 0}
-            :min-w-full {:min-width "100%"}
-            ;; L5112 .object-contain
-            ]
-           ]))
+            :min-w-full {:min-width "100%"}]]))
+
+(def opacity
+  (reduce
+    (fn [coll [k v]]
+      (into coll [(str "opacity-" (name k)) {:opacity v}]))
+    [] {:0 0 :25 0.25 :50 0.5 :75 0.75 :100 1}))
 
 (def components
   (reduce into [main
@@ -363,7 +367,29 @@
                  :list-none {:list-style-type "none"}
                  :list-disc {:list-style-type "disc"}
                  :list-decimal {:list-style-type "decimal"}]
-          ]))
+                [:object-contain {:-o-object-fit "contain" :object-fit "contain"}
+                 :object-cover {:-o-object-fit "cover" :object-fit "cover"}
+                 :object-fill {:-o-object-fit "fill" :object-fit "fill"}
+                 :object-none {:-o-object-fit "none" :object-fit "none"}
+                 :object-scale-down {:-o-object-fit "scale-down" :object-fit "scale-down"}
+                 :object-bottom {:-o-object-position "bottom" :object-position "bottom"}
+                 :object-center {:-o-object-position "center" :object-position "center"}
+                 :object-left {:-o-object-position "left" :object-position "left"}
+                 :object-left-bottom {:-o-object-position "left bottom"
+                                      :object-position "left bottom"}
+                 :object-left-top {:-o-object-position "left top"
+                                      :object-position "left top"}
+                 :object-right {:-o-object-position "right" :object-position "right"}
+                 :object-right-bottom {:-o-object-position "right bottom"
+                                      :object-position "right bottom"}
+                 :object-right-top {:-o-object-position "right top"
+                                      :object-position "right top"}
+                 :object-top {:-o-object-position "top" :object-position "top"}
+                 opacity
+                 (with-pseudo-class "hover" opacity)
+                 (with-pseudo-class "focus" opacity)
+                 ]
+                ]))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
 ;; abstract this work here too to keep things DRY.
