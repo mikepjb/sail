@@ -42,7 +42,7 @@ I love to use.**
 - [ ] include placeholder classes
 - [ ] .container + .sr-only
 - [ ] include media queries
-
+- [ ] consider adding text-decoration-style (add PR to tailwindcss repo) https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
 ## Plan A
 
 - run postcss/tailwindcss via cli, produce css
