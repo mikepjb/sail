@@ -27,6 +27,8 @@ I love to use.**
   versions are released)
 - [ ] autoprefix css rules that require it.
 - [ ] purgecss style dead code elimination
+  - N.B using keywords alone with strip out uses in html e.g index.html base
+    page.
 - [ ] describe/find a clean way of tacking this onto a project? e.g already
   using sass?
 - [ ] cssnano, minification?
