@@ -67,12 +67,24 @@
         (str output-string (name k) ":" v ";")))
     "" (if (map? smap) smap (partition 2 smap))))
 
-(type (into base normalize))
+(defn with-responsive-prefix
+  "Apply a min-width media query an class prefix to styles e.g md:text-gray-700"
+  [smap prefix screen-width]
+  (str "@media (min-width: " screen-width "){"
+  (style->string
+    (reduce (fn [coll [k v]]
+              (into coll [(str prefix k) v]))
+            [] (partition 2 smap))) "}"))
 
 (def all (reduce into [normalize base components]))
 
 (defn generate-styles []
-  (spit "generated-style.css" (style->string all)))
+  (spit "generated-style.css"
+        (str (style->string all)
+             (with-responsive-prefix components "sm" "640px")
+             (with-responsive-prefix components "md" "768px")
+             (with-responsive-prefix components "sm" "1024px")
+             (with-responsive-prefix components "sm" "1024px"))))
 
 (generate-styles)
 
