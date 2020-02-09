@@ -256,7 +256,7 @@
 
 (defn leading-class []
   (reduce (fn [coll [k v]]
-            (into coll [(keyword (str "font-" (name k)))
+            (into coll [(keyword (str "leading-" (name k)))
                         {:line-height v}])) [] leading-table))
 
 (defn tracking-class []

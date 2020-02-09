@@ -55,8 +55,8 @@ I love to use.**
 
 ## Usage [work in progress]
 
-`[sail "0.5.1"]`
-`{sail {:mvn/version "0.5.1"}}`
+`[sail "0.5.2"]`
+`{sail {:mvn/version "0.5.2"}}`
 
 ```
 (require '[sail.core :as sail]')
