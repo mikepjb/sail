@@ -159,8 +159,107 @@
    :table-row {:display "table-row"}
    :table-cell {:display "table-cell"}
    :hidden {:display "none"}
-   :flex-row {:display "flex-row"}
-   ])
+   :flex-row [:-webkit-box-orient "horizontal"
+              :-webkit-box-direction "normal"
+              :flex-direction "row"]
+   :flex-row-reverse [:-webkit-box-orient "horizontal"
+                      :-webkit-box-direction "reverse"
+                      :flex-direction "row-reverse"]
+   :flex-col [:-webkit-box-orient "horizontal"
+              :-webkit-box-direction "normal"
+              :flex-direction "column"]
+   :flex-col-reverse [:-webkit-box-orient "horizontal"
+                      :-webkit-box-direction "reverse"
+                      :flex-direction "column-reverse"]
+   :flex-wrap {:flex-wrap "wrap"}
+   :flex-wrap-reverse {:flex-wrap "wrap-reverse"}
+   :flex-no-wrap {:flex-wrap "nowrap"}
+   :items-start {:-webkit-box-align "start" :align-items "flex-start"}
+   :items-end {:-webkit-box-align "end" :align-items "flex-end"}
+   :items-center {:-webkit-box-align "center" :align-items "flex-center"}
+   :items-baseline {:-webkit-box-align "baseline" :align-items "flex-baseline"}
+   :items-stretch {:-webkit-box-align "stretch" :align-items "flex-stretch"}
+   :self-auto {:align-self "auto"}
+   :self-start {:align-self "flex-start"}
+   :self-end {:align-self "flex-end"}
+   :self-center {:align-self "center"}
+   :self-stretch {:align-self "stretch"}
+   :justify-start {:-webkit-box-pack "start" :justify-content "flex-start"}
+   :justify-end {:-webkit-box-pack "end" :justify-content "flex-end"}
+   :justify-center {:-webkit-box-pack "center" :justify-content "center"}
+   :justify-between {:-webkit-box-pack "justify" :justify-content "space-between"}
+   :justify-around {:justify-content "space-around"}
+   :content-center {:align-content "center"}
+   :content-start {:align-content "flex-start"}
+   :content-end {:align-content "flex-end"}
+   :content-between {:align-content "space-between"}
+   :content-around {:align-content "space-around"}
+   :flex-1 [:-webkit-box-flex 1 :flex "1 1 0%"]
+   :flex-auto [:-webkit-box-flex 1 :flex "1 1 auto"]
+   :flex-initial [:-webkit-box-flex 0 :flex "0 1 auto"]
+   :flex-none [:-webkit-box-flex 0 :flex "none"]
+   :flex-grow-0 [:-webkit-box-flex 0 :flex 0]
+   :flex-grow [:-webkit-box-flex 1 :flex 1]
+   :flex-shrink-0 {:flex-shrink 0}
+   :flex-shrink {:flex-shrink 1}
+   :order-1 {:-webkit-box-ordinal-group 2 :order 1}
+   :order-2 {:-webkit-box-ordinal-group 3 :order 2}
+   :order-3 {:-webkit-box-ordinal-group 4 :order 3}
+   :order-4 {:-webkit-box-ordinal-group 5 :order 4}
+   :order-5 {:-webkit-box-ordinal-group 6 :order 5}
+   :order-6 {:-webkit-box-ordinal-group 7 :order 6}
+   :order-7 {:-webkit-box-ordinal-group 8 :order 7}
+   :order-8 {:-webkit-box-ordinal-group 9 :order 8}
+   :order-9 {:-webkit-box-ordinal-group 10 :order 9}
+   :order-10 {:-webkit-box-ordinal-group 11 :order 10}
+   :order-11 {:-webkit-box-ordinal-group 12 :order 11}
+   :order-12 {:-webkit-box-ordinal-group 13 :order 12}
+   :order-first {:-webkit-box-ordinal-group -9998 :order -9999}
+   :order-last {:-webkit-box-ordinal-group 10000 :order 9999}
+   :order-none {:-webkit-box-ordinal-group 1 :order 0}
+   :float-right {:float "right"}
+   :float-left {:float "left"}
+   :float-none {:float "none"}
+   :clearfix:after {:content "\"\"" :display "table" :clear "both"}])
+
+(def weight-table
+  {:hairline 100
+   :thin 200
+   :light 300
+   :normal 400
+   :medium 500
+   :semibold 600
+   :bold 700
+   :extrabold 800
+   :black 900})
+
+(defn weight-class []
+  (reduce (fn [coll [k v]]
+            (into coll [(keyword (str "font-" (name k)))
+                        {:font-weight v}])) [] weight-table))
+
+(def leading-table
+  {:none 1
+   :tight 1.25
+   :snug 1.375
+   :normal 1.5
+   :relaxed 1.625
+   :loose 2})
+
+(defn leading-class []
+  (reduce (fn [coll [k v]]
+            (into coll [(keyword (str "font-" (name k)))
+                        {:line-height v}])) [] leading-table))
+
+(def font
+  (reduce into
+          [[:font-sans "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+            :font-serif "Georgia, Cambria, \"Times New Roman\", Times, serif"
+            :font-mono "Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"]
+           (weight-class)
+           (with-pseudo-class "hover" (weight-class))
+           (with-pseudo-class "focus" (weight-class))
+           (leading-class)]))
 
 ;; (defn with-media-query)
 (defn with-pseudo-class
@@ -170,6 +269,40 @@
     (fn [coll [k v]]
       (into coll [(keyword (str class-name ":" (name k) ":" class-name)) v]))
     [] (partition 2 css-rules)))
+
+(def spacing-table
+  {:0 "0"
+   :1 "0.25rem"
+   :2 "0.5rem"
+   :3 "0.75rem"
+   :4 "1rem"
+   :5 "1.25rem"
+   :6 "1.5rem"
+   :8 "2rem"
+   :10 "2.5rem"
+   :12 "3rem"
+   :16 "4rem"
+   :20 "5rem"
+   :24 "6rem"
+   :32 "8rem"
+   :40 "10rem"
+   :48 "12rem"
+   :56 "14rem"
+   :64 "16rem"
+   :auto "auto"
+   :px "1px"})
+
+(defn spacing-class [prefix property]
+  (reduce (fn [coll [k v]]
+            (into coll [(keyword (str prefix "-" (name k)))
+                        {(keyword property) v}])) [] spacing-table))
+
+(def spacing
+  (reduce into
+          [(spacing-class "h" "height")
+           [:h-full {:height "100%"}]
+           [:h-screen {:height "100vh"}]
+           ]))
 
 (def components
   (reduce into [main
@@ -182,7 +315,13 @@
                 border
                 cursor
                 display
-                ]))
+                font
+                [:list-inside {:list-style-position "inside"}
+                 :list-outside {:list-style-position "outside"}
+                 :list-none {:list-style-type "none"}
+                 :list-disc {:list-style-type "disc"}
+                 :list-decimal {:list-style-type "decimal"}]
+          ]))
 
 ;; stopped at L487.. looks like the work of autoprefixer, I'd like to
 ;; abstract this work here too to keep things DRY.
