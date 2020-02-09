@@ -292,16 +292,37 @@
    :auto "auto"
    :px "1px"})
 
-(defn spacing-class [prefix property]
-  (reduce (fn [coll [k v]]
-            (into coll [(keyword (str prefix "-" (name k)))
-                        {(keyword property) v}])) [] spacing-table))
+;; TODO does the job but is unwieldy
+(defn spacing-class [prefix properties & [property-prefix]]
+  (reduce
+    (fn [coll [k v]]
+      (into coll [(keyword (str prefix "-" (name k)))
+                  (into {} (mapv
+                             (fn [p]
+                               [(keyword p)
+                                (if property-prefix (str property-prefix v) v)])
+                             (if (vector? properties) properties [properties])
+                             ))])) [] spacing-table))
 
 (def spacing
   (reduce into
           [(spacing-class "h" "height")
            [:h-full {:height "100%"}]
            [:h-screen {:height "100vh"}]
+           (spacing-class "m" "margin")
+           (spacing-class "-m" "margin" "-")
+           (spacing-class "my" ["margin-top" "margin-bottom"])
+           (spacing-class "mx" ["margin-left" "margin-right"])
+           (spacing-class "-my" ["margin-top" "margin-bottom"] "-")
+           (spacing-class "-mx" ["margin-left" "margin-right"] "-")
+           (spacing-class "mt" "margin-top")
+           (spacing-class "mr" "margin-right")
+           (spacing-class "ml" "margin-left")
+           (spacing-class "mb" "margin-bottom")
+           (spacing-class "-mt" "margin-top" "-")
+           (spacing-class "-mr" "margin-right" "-")
+           (spacing-class "-ml" "margin-left" "-")
+           (spacing-class "-mb" "margin-bottom" "-")
            ]))
 
 (def components
@@ -316,6 +337,7 @@
                 cursor
                 display
                 font
+                spacing
                 [:list-inside {:list-style-position "inside"}
                  :list-outside {:list-style-position "outside"}
                  :list-none {:list-style-type "none"}
