@@ -305,6 +305,7 @@
                              (if (vector? properties) properties [properties])
                              ))])) [] spacing-table))
 
+;; N.B these are grouped semantically, vanilla has a different order.
 (def spacing
   (reduce into
           [(spacing-class "h" "height")
@@ -341,7 +342,17 @@
             :min-h-full {:min-height "100%"}
             :min-h-screen {:min-height "100vh"}
             :min-w-0 {:min-width 0}
-            :min-w-full {:min-width "100%"}]]))
+            :min-w-full {:min-width "100%"}]
+           (spacing-class "p" "padding")
+           (spacing-class "py" ["padding-top" "padding-bottom"])
+           (spacing-class "px" ["padding-left" "padding-right"])
+           (spacing-class "pt" "padding-top")
+           (spacing-class "pr" "padding-right")
+           (spacing-class "pl" "padding-left")
+           (spacing-class "pb" "padding-bottom")
+           ;; TODO no placeholder for now, I don't use these classes
+           ;; placeholder stuff from L5876 until L9592
+           ]))
 
 (def opacity
   (reduce
@@ -388,6 +399,23 @@
                  opacity
                  (with-pseudo-class "hover" opacity)
                  (with-pseudo-class "focus" opacity)
+                 [:outline-none {:outline 0}
+                  :focus:outline:focus {:outline 0}
+                  :overflow-auto {:overflow "auto"}
+                  :overflow-hidden {:overflow "hidden"}
+                  :overflow-visible {:overflow "visible"}
+                  :overflow-scroll {:overflow "scroll"}
+                  :overflow-x-auto {:overflow-x "auto"}
+                  :overflow-y-auto {:overflow-y "auto"}
+                  :overflow-x-hidden {:overflow-x "hidden"}
+                  :overflow-y-hidden {:overflow-y "hidden"}
+                  :overflow-x-visible {:overflow-x "visible"}
+                  :overflow-y-visible {:overflow-y "visible"}
+                  :overflow-x-scroll {:overflow-x "scroll"}
+                  :overflow-y-scroll {:overflow-y "scroll"}
+                  :scrolling-touch {:-webkit-overflow-scrolling "touch"}
+                  :scrolling-auto {:-webkit-overflow-scrolling "auto"}
+                  ]
                  ]
                 ]))
 

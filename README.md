@@ -14,7 +14,7 @@ tailwind is a utility first css framework that is a postcss plugin under the
 hood. It is intended to be used with autoprefixer (another postcss plugin) and
 purgecss.
 
-move makes the tools provided by tailwind available to Clojure projects as a
+sail makes the tools provided by tailwind available to Clojure projects as a
 library, without the you (the library user) having to depend on npm/node. 
 
 **Sail is essentially a Clojure port of the Tailwind CSS workflow/build system
