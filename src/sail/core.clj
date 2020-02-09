@@ -79,7 +79,7 @@
 (def all (reduce into [normalize base components]))
 
 (defn generate-styles [path]
-  (spit "generated-style.css"
+  (spit path
         (str (style->string all)
              (with-responsive-prefix components "sm" "640px")
              (with-responsive-prefix components "md" "768px")
