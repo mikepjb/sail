@@ -36,7 +36,9 @@ I love to use.**
 - [ ] how to use guide
 - [ ] roadmap for development
 - [ ] clean up components code (mostly putting things under the correct names)
-- [ ] include placeholders classes
+- [ ] include placeholder classes
+- [ ] .container + .sr-only
+- [ ] include media queries
 
 ## Plan A
 

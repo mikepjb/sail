@@ -12,9 +12,7 @@
 
 
 (def main ;; for lack of a better name..
-  [;; TODO skipped L602 .container and media queries 
-   ;; TODO skipped sr-only
-   :appearance-none
+  [:appearance-none
    {:-webkit-appearance "none"
     :-moz-appearance "none"
     :appearance "none"}

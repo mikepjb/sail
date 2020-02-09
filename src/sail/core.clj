@@ -79,7 +79,14 @@
 ;; TODO use this for dead code elimination
 ;; https://clojureverse.org/t/list-all-unique-keywords-in-current-project/4024/5
 ;; loads all keywords
-#_(let [f (.getDeclaredField clojure.lang.Keyword "table")]
+;; need to:
+;;   - find html keyword prefixed keywords e.g :div.bg-gray-300.text-gray-900
+;;   - split those keywords by . -> [:bg-gray-300 :text-gray-900]
+;;   - filter out the keywords that don't match from 'all'.
+(defn all-project-keywords []
+  "Traverses project source code returning all keywords (incl. 3rd party code).
+  This is important so we can only include tailwind classes that have been used."
+  (let [f (.getDeclaredField clojure.lang.Keyword "table")]
     (.setAccessible f true)
-    (map #(.get %) (vals (.get f nil))))
+    (map #(.get %) (vals (.get f nil)))))
 
