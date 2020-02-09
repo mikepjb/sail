@@ -323,6 +323,26 @@
            (spacing-class "-mr" "margin-right" "-")
            (spacing-class "-ml" "margin-left" "-")
            (spacing-class "-mb" "margin-bottom" "-")
+           [:max-h-full {:max-height "100%"}
+            :max-h-screen {:max-height "100vh"}
+            :max-w-xs {:max-width "20rem"}
+            :max-w-sm {:max-width "24rem"}
+            :max-w-md {:max-width "28rem"}
+            :max-w-lg {:max-width "32rem"}
+            :max-w-xl {:max-width "36rem"}
+            :max-w-2xl {:max-width "42rem"}
+            :max-w-3xl {:max-width "48rem"}
+            :max-w-4xl {:max-width "56rem"}
+            :max-w-5xl {:max-width "64rem"}
+            :max-w-6xl {:max-width "72rem"}
+            :max-w-full {:max-width "100%"}
+            :min-h-0 {:min-height 0}
+            :min-h-full {:min-height "100%"}
+            :min-h-screen {:min-height "100vh"}
+            :min-w-0 {:min-width 0}
+            :min-w-full {:min-width "100%"}
+            ;; L5112 .object-contain
+            ]
            ]))
 
 (def components
