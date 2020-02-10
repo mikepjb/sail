@@ -396,7 +396,7 @@
             :z-40 {:z-index 40}
             :z-50 {:z-index 50}
             :z-auto {:z-index "auto"}
-            :smooth-scroll {:scroll-behaviour "smooth"}]
+            :smooth-scroll {:scroll-behavior "smooth"}]
            ;; TODO no placeholder for now, I don't use these classes
            ;; placeholder stuff from L5876 until L9592
            [:pointer-events-none {:pointer-events "none"}
