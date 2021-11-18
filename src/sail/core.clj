@@ -65,7 +65,8 @@
     (fn [output-string [k v]]
       (if (or (map? v) (vector? v))
         (str output-string (->selector k) "{" (style->string v) "}")
-        (str output-string (name k) ":" v ";")))
+        (str output-string (name k) ":" (if (keyword? v)
+                                          (name v) v) ";")))
     "" (if (map? smap) smap (partition 2 smap))))
 
 (defn with-responsive-prefix
