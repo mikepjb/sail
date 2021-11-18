@@ -2,7 +2,8 @@
   (:require [clojure.string]
             [sail.normalize :refer [normalize]]
             [sail.base :refer [base]]
-            [sail.components :refer [components]]))
+            [sail.components :refer [components]]
+            [sail.accessibility :refer [accessibility]]))
 
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
@@ -76,7 +77,7 @@
               (into coll [(str prefix k) v]))
             [] (partition 2 smap))) "}"))
 
-(def all (reduce into [normalize base components]))
+(def all (reduce into [normalize base components accessibility]))
 
 (defn generate-styles [path]
   (spit path
