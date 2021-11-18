@@ -29,36 +29,25 @@ I love to use.**
 - [ ] purgecss style dead code elimination
   - N.B using keywords alone with strip out uses in html e.g index.html base
     page.
-- [ ] describe/find a clean way of tacking this onto a project? e.g already
+- [X] describe/find a clean way of tacking this onto a project? e.g already
   using sass?
-- [ ] cssnano, minification?
+- [X] cssnano, minification?
 - [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
   - most likely a cljs npm language-server will do the trick.
   writing hiccup is important though for this workflow.)
-- [ ] add in all default colors
+- [X] add in all default colors
 - [ ] how to use guide
-- [ ] roadmap for development
 - [ ] clean up components code (mostly putting things under the correct names)
 - [ ] include placeholder classes
-- [ ] .container + .sr-only
-- [ ] include media queries
+- [ ] .container
+- [X] .sr-only
+- [X] include media queries
 - [ ] consider adding text-decoration-style (add PR to tailwindcss repo) https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
-## Plan A
-
-- run postcss/tailwindcss via cli, produce css
-- read css using garden
-- transform
-  - reduce by looking at clojure source code for usage
-
-## Plan B
-
-- generate your own css file based on a similar system.
-- compare it to the minified distributed version for comparison of types.
 
 ## Usage [work in progress]
 
-`[sail "0.5.2"]`
-`{sail {:mvn/version "0.5.2"}}`
+`[sail "0.5.7"]`
+`{sail {:mvn/version "0.5.7"}}`
 
 ```
 (require '[sail.core :as sail]')

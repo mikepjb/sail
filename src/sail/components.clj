@@ -124,6 +124,7 @@
             :border-double {:border-style "double"}
             :border-none {:border-style "none"}
             :border-0 {:border-width "0"}
+            :border-1 {:border-width "1px"}
             :border-2 {:border-width "2px"}
             :border-4 {:border-width "4px"}
             :border-8 {:border-width "8px"}
@@ -146,7 +147,189 @@
             :border-t {:border-top-width "1px"}
             :border-r {:border-right-width "1px"}
             :border-b {:border-bottom-width "1px"}
-            :border-l {:border-left-width "1px"}]]))
+            :border-l {:border-left-width "1px"}
+            :border-opacity-0	  {:--tw-border-opacity 0}
+            :border-opacity-5	  {:--tw-border-opacity 0.05}
+            :border-opacity-10	{:--tw-border-opacity 0.1}
+            :border-opacity-20	{:--tw-border-opacity 0.2}
+            :border-opacity-25	{:--tw-border-opacity 0.2}
+            :border-opacity-30	{:--tw-border-opacity 0.3}
+            :border-opacity-40	{:--tw-border-opacity 0.4}
+            :border-opacity-50	{:--tw-border-opacity 0.5}
+            :border-opacity-60	{:--tw-border-opacity 0.6}
+            :border-opacity-70	{:--tw-border-opacity 0.7}
+            :border-opacity-75	{:--tw-border-opacity 0.7}
+            :border-opacity-80	{:--tw-border-opacity 0.8}
+            :border-opacity-90	{:--tw-border-opacity 0.9}
+            :border-opacity-95	{:--tw-border-opacity 0.9}
+            :border-opacity-100	{:--tw-border-opacity 1}
+            :border-transparent	{:border-color :transparent}
+            :border-current	{:border-color :currentColor}
+            :border-black	{:--tw-border-opacity 1
+                           :border-color "rgba(0 0, 0, var(--tw-border-opacity))"}
+            :border-white	{:--tw-border-opacity 1
+                           :border-color "rgba(255, 255, 255, var(--tw-border-opacity))"}
+            :border-gray-50	{:--tw-border-opacity 1
+                             :border-color "rgba(249, 250, 251, var(--tw-border-opacity))"}
+            :border-gray-100 {:--tw-border-opacity 1
+                              :border-color "rgba(243, 244, 246, var(--tw-border-opacity))"}
+            :border-gray-200 {:--tw-border-opacity 1
+                              :border-color "rgba(229, 231, 235, var(--tw-border-opacity))"}
+            :border-gray-300 {:--tw-border-opacity 1
+                              :border-color "rgba(209, 213, 219, var(--tw-border-opacity))"}
+            :border-gray-400 {:--tw-border-opacity 1
+                              :border-color "rgba(156, 163, 175, var(--tw-border-opacity))"}
+            :border-gray-500 {:--tw-border-opacity 1
+                              :border-color "rgba(107, 114, 128, var(--tw-border-opacity))"}
+            :border-gray-600 {:--tw-border-opacity 1
+                              :border-color "rgba(75, 85, 99, var(--tw-border-opacity))"}
+            :border-gray-700 {:--tw-border-opacity 1
+                              :border-color "rgba(55, 65, 81, var(--tw-border-opacity))"}
+            :border-gray-800 {:--tw-border-opacity 1
+                              :border-color "rgba(31, 41, 55, var(--tw-border-opacity))"}
+            :border-gray-900 {:--tw-border-opacity 1
+                              :border-color "rgba(17, 24, 39, var(--tw-border-opacity))"}
+            :border-red-50 {:--tw-border-opacity 1
+                            :border-color "rgba(254, 242, 242, var(--tw-border-opacity))"}
+            :border-red-100 {:--tw-border-opacity 1
+                             :border-color "rgba(254, 226, 226, var(--tw-border-opacity))"}
+            :border-red-200 {:--tw-border-opacity 1
+                             :border-color "rgba(254, 202, 202, var(--tw-border-opacity))"}
+            :border-red-300 {:--tw-border-opacity 1
+                             :border-color "rgba(252, 165, 165, var(--tw-border-opacity))"}
+            :border-red-400 {:--tw-border-opacity 1
+                             :border-color "rgba(248, 113, 113, var(--tw-border-opacity))"}
+            :border-red-500 {:--tw-border-opacity 1
+                             :border-color "rgba(239, 68, 68, var(--tw-border-opacity))"}
+            :border-red-600 {:--tw-border-opacity 1
+                             :border-color "rgba(220, 38, 38, var(--tw-border-opacity))"}
+            :border-red-700 {:--tw-border-opacity 1
+                             :border-color "rgba(185, 28, 28, var(--tw-border-opacity))"}
+            :border-red-800 {:--tw-border-opacity 1
+                             :border-color "rgba(153, 27, 27, var(--tw-border-opacity))"}
+            :border-red-900 {:--tw-border-opacity 1
+                             :border-color "rgba(127, 29, 29, var(--tw-border-opacity))"}
+            :border-yellow-50 {:--tw-border-opacity 1
+                               :border-color "rgba(255, 251, 235, var(--tw-border-opacity))"}
+            :border-yellow-100 {:--tw-border-opacity 1
+                                :border-color "rgba(254, 243, 199, var(--tw-border-opacity))"}
+            :border-yellow-200 {:--tw-border-opacity 1
+                                :border-color "rgba(253, 230, 138, var(--tw-border-opacity))"}
+            :border-yellow-300 {:--tw-border-opacity 1
+                                :border-color "rgba(252, 211, 77, var(--tw-border-opacity))"}
+            :border-yellow-400 {:--tw-border-opacity 1
+                                :border-color "rgba(251, 191, 36, var(--tw-border-opacity))"}
+            :border-yellow-500 {:--tw-border-opacity 1
+                                :border-color "rgba(245, 158, 11, var(--tw-border-opacity))"}
+            :border-yellow-600 {:--tw-border-opacity 1
+                                :border-color "rgba(217, 119, 6, var(--tw-border-opacity))"}
+            :border-yellow-700 {:--tw-border-opacity 1
+                                :border-color "rgba(180, 83, 9, var(--tw-border-opacity))"}
+            :border-yellow-800 {:--tw-border-opacity 1
+                                :border-color "rgba(146, 64, 14, var(--tw-border-opacity))"}
+            :border-yellow-900 {:--tw-border-opacity 1
+                                :border-color "rgba(120, 53, 15, var(--tw-border-opacity))"}
+            :border-green-50 {:--tw-border-opacity 1
+                              :border-color "rgba(236, 253, 245, var(--tw-border-opacity))"}
+            :border-green-100 {:--tw-border-opacity 1
+                               :border-color "rgba(209, 250, 229, var(--tw-border-opacity))"}
+            :border-green-200 {:--tw-border-opacity 1
+                               :border-color "rgba(167, 243, 208, var(--tw-border-opacity))"}
+            :border-green-300 {:--tw-border-opacity 1
+                               :border-color "rgba(110, 231, 183, var(--tw-border-opacity))"}
+            :border-green-400 {:--tw-border-opacity 1
+                               :border-color "rgba(52, 211, 153, var(--tw-border-opacity))"}
+            :border-green-500 {:--tw-border-opacity 1
+                               :border-color "rgba(16, 185, 129, var(--tw-border-opacity))"}
+            :border-green-600 {:--tw-border-opacity 1
+                               :border-color "rgba(5, 150, 105, var(--tw-border-opacity))"}
+            :border-green-700 {:--tw-border-opacity 1
+                               :border-color "rgba(4, 120, 87, var(--tw-border-opacity))"}
+            :border-green-800 {:--tw-border-opacity 1
+                               :border-color "rgba(6, 95, 70, var(--tw-border-opacity))"}
+            :border-green-900 {:--tw-border-opacity 1
+                               :border-color "rgba(6, 78, 59, var(--tw-border-opacity))"}
+            :border-blue-50 {:--tw-border-opacity 1
+                             :border-color "rgba(239, 246, 255, var(--tw-border-opacity))"}
+            :border-blue-100 {:--tw-border-opacity 1
+                              :border-color "rgba(219, 234, 254, var(--tw-border-opacity))"}
+            :border-blue-200 {:--tw-border-opacity 1
+                              :border-color "rgba(191, 219, 254, var(--tw-border-opacity))"}
+            :border-blue-300 {:--tw-border-opacity 1
+                              :border-color "rgba(147, 197, 253, var(--tw-border-opacity))"}
+            :border-blue-400 {:--tw-border-opacity 1
+                              :border-color "rgba(96, 165, 250, var(--tw-border-opacity))"}
+            :border-blue-500 {:--tw-border-opacity 1
+                              :border-color "rgba(59, 130, 246, var(--tw-border-opacity))"}
+            :border-blue-600 {:--tw-border-opacity 1
+                              :border-color "rgba(37, 99, 235, var(--tw-border-opacity))"}
+            :border-blue-700 {:--tw-border-opacity 1
+                              :border-color "rgba(29, 78, 216, var(--tw-border-opacity))"}
+            :border-blue-800 {:--tw-border-opacity 1
+                              :border-color "rgba(30, 64, 175, var(--tw-border-opacity))"}
+            :border-blue-900 {:--tw-border-opacity 1
+                              :border-color "rgba(30, 58, 138, var(--tw-border-opacity))"}
+            :border-indigo-50 {:--tw-border-opacity 1
+                               :border-color "rgba(238, 242, 255, var(--tw-border-opacity))"}
+            :border-indigo-100 {:--tw-border-opacity 1
+                                :border-color "rgba(224, 231, 255, var(--tw-border-opacity))"}
+            :border-indigo-200 {:--tw-border-opacity 1
+                                :border-color "rgba(199, 210, 254, var(--tw-border-opacity))"}
+            :border-indigo-300 {:--tw-border-opacity 1
+                                :border-color "rgba(165, 180, 252, var(--tw-border-opacity))"}
+            :border-indigo-400 {:--tw-border-opacity 1
+                                :border-color "rgba(129, 140, 248, var(--tw-border-opacity))"}
+            :border-indigo-500 {:--tw-border-opacity 1
+                                :border-color "rgba(99, 102, 241, var(--tw-border-opacity))"}
+            :border-indigo-600 {:--tw-border-opacity 1
+                                :border-color "rgba(79, 70, 229, var(--tw-border-opacity))"}
+            :border-indigo-700 {:--tw-border-opacity 1
+                                :border-color "rgba(67, 56, 202, var(--tw-border-opacity))"}
+            :border-indigo-800 {:--tw-border-opacity 1
+                                :border-color "rgba(55, 48, 163, var(--tw-border-opacity))"}
+            :border-indigo-900 {:--tw-border-opacity 1
+                                :border-color "rgba(49, 46, 129, var(--tw-border-opacity))"}
+            :border-purple-50 {:--tw-border-opacity 1
+                               :border-color "rgba(245, 243, 255, var(--tw-border-opacity))"}
+            :border-purple-100 {:--tw-border-opacity 1
+                                :border-color "rgba(237, 233, 254, var(--tw-border-opacity))"}
+            :border-purple-200 {:--tw-border-opacity 1
+                                :border-color "rgba(221, 214, 254, var(--tw-border-opacity))"}
+            :border-purple-300 {:--tw-border-opacity 1
+                                :border-color "rgba(196, 181, 253, var(--tw-border-opacity))"}
+            :border-purple-400 {:--tw-border-opacity 1
+                                :border-color "rgba(167, 139, 250, var(--tw-border-opacity))"}
+            :border-purple-500 {:--tw-border-opacity 1
+                                :border-color "rgba(139, 92, 246, var(--tw-border-opacity))"}
+            :border-purple-600 {:--tw-border-opacity 1
+                                :border-color "rgba(124, 58, 237, var(--tw-border-opacity))"}
+            :border-purple-700 {:--tw-border-opacity 1
+                                :border-color "rgba(109, 40, 217, var(--tw-border-opacity))"}
+            :border-purple-800 {:--tw-border-opacity 1
+                                :border-color "rgba(91, 33, 182, var(--tw-border-opacity))"}
+            :border-purple-900 {:--tw-border-opacity 1
+                                :border-color "rgba(76, 29, 149, var(--tw-border-opacity))"}
+            :border-pink-50 {:--tw-border-opacity 1
+                             :border-color "rgba(253, 242, 248, var(--tw-border-opacity))"}
+            :border-pink-100 {:--tw-border-opacity 1
+                              :border-color "rgba(252, 231, 243, var(--tw-border-opacity))"}
+            :border-pink-200 {:--tw-border-opacity 1
+                              :border-color "rgba(251, 207, 232, var(--tw-border-opacity))"}
+            :border-pink-300 {:--tw-border-opacity 1
+                              :border-color "rgba(249, 168, 212, var(--tw-border-opacity))"}
+            :border-pink-400 {:--tw-border-opacity 1
+                              :border-color "rgba(244, 114, 182, var(--tw-border-opacity))"}
+            :border-pink-500 {:--tw-border-opacity 1
+                              :border-color "rgba(236, 72, 153, var(--tw-border-opacity))"}
+            :border-pink-600 {:--tw-border-opacity 1
+                              :border-color "rgba(219, 39, 119, var(--tw-border-opacity))"}
+            :border-pink-700 {:--tw-border-opacity 1
+                              :border-color "rgba(190, 24, 93, var(--tw-border-opacity))"}
+            :border-pink-800 {:--tw-border-opacity 1
+                              :border-color "rgba(157, 23, 77, var(--tw-border-opacity))"}
+            :border-pink-900 {:--tw-border-opacity 1
+                              :border-color "rgba(131, 24, 67, var(--tw-border-opacity)"}
+]]))
 
 (def cursor
   [:cursor-auto {:cursor "auto"}
