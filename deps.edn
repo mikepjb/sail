@@ -7,5 +7,7 @@
            :pack {:extra-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"
                                                 :sha "d9023b24c3d589ba6ebc66c5a25c0826ed28ead5"}
                                javax.xml.bind/jaxb-api {:mvn/version "2.4.0-b180830.0359"}}
-                  :main-opts ["-m"]}}}
+                  :main-opts ["-m"]}
+           :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+                    :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "sail.jar"]}}}
 

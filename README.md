@@ -90,7 +90,8 @@ display: inline-flex;
 ```
 rm sail.jar
 clj -A:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
-mvn deploy
+# mvn deploy
+CLOJARS_USERNAME="x" CLOJARS_PASSWORD="y" clj -A:deploy
 ```
 
 ## Reference
