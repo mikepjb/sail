@@ -184,9 +184,9 @@
    :flex-no-wrap {:flex-wrap "nowrap"}
    :items-start {:-webkit-box-align "start" :align-items "flex-start"}
    :items-end {:-webkit-box-align "end" :align-items "flex-end"}
-   :items-center {:-webkit-box-align "center" :align-items "flex-center"}
-   :items-baseline {:-webkit-box-align "baseline" :align-items "flex-baseline"}
-   :items-stretch {:-webkit-box-align "stretch" :align-items "flex-stretch"}
+   :items-center {:-webkit-box-align "center" :align-items "center"}
+   :items-baseline {:-webkit-box-align "baseline" :align-items "baseline"}
+   :items-stretch {:-webkit-box-align "stretch" :align-items "stretch"}
    :self-auto {:align-self "auto"}
    :self-start {:align-self "flex-start"}
    :self-end {:align-self "flex-end"}
