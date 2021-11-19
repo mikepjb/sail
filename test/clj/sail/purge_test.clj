@@ -1,6 +1,8 @@
 (ns sail.purge-test
   (:require [clojure.test :refer [deftest testing is]]
-            [sail.core :as sail]))
+            [sail.core :as sail]
+            [clojure.string]
+            [sail.components :refer [components]]))
 
 (comment
   (def all-keywords (sail/all-project-keywords))
@@ -42,6 +44,13 @@
             :bg-red-400 {:background-color "#fc8181"}
             :bg-green-300 {:background-color "#9ae6b4"}
             ;; no div here as there are no pre-defined styles for it
-            :p-4 {:padding "1rem"}
             :m-4 {:margin "1rem"}
-            :text-red-500 {:color "#f56565"}]))))
+            :p-4 {:padding "1rem"}
+            :text-red-500 {:color "#f56565"}])))
+
+  (testing "text-pink-800 and it's media query classes (e.g sm:text-pink-800) are not included as it wasn't used in the project"
+    (is (not (clojure.string/includes?
+                (sail/internal-generate-styles
+                  (sail/purge-styles sail/all [:span.text-red-500 :body.p-4 :div.m-4.bg-green-300 :bg-red-400])
+                  (sail/purge-styles components [:span.text-red-500 :body.p-4 :div.m-4.bg-green-300 :bg-red-400]))
+                "text-pink-800")))))

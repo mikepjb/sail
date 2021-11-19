@@ -80,20 +80,20 @@
 
 (def all (reduce into [normalize base components accessibility]))
 
-(defn internal-generate-styles [css-styles]
+(defn internal-generate-styles [css-styles css-components-styles]
   (str (style->string css-styles)
-       (with-responsive-prefix components "sm" "640px")
-       (with-responsive-prefix components "md" "768px")
-       (with-responsive-prefix components "sm" "1024px")
-       (with-responsive-prefix components "sm" "1024px")))
+       (with-responsive-prefix css-components-styles "sm" "640px")
+       (with-responsive-prefix css-components-styles "md" "768px")
+       (with-responsive-prefix css-components-styles "sm" "1024px")
+       (with-responsive-prefix css-components-styles "sm" "1024px")))
 
 (defn generate-styles [path]
-  (spit path (internal-generate-styles all)))
+  (spit path (internal-generate-styles all components)))
 
 (defn generate-styles-with
   "Generate Tailwind CSS and append the provided css-file on the end."
   [path css-file]
-  (spit path (str (internal-generate-styles all) (slurp css-file))))
+  (spit path (str (internal-generate-styles all components) (slurp css-file))))
 
 (defn split-tags-and-classes [tags]
   (reduce
@@ -126,11 +126,15 @@
                     acc
                     (recur (conj acc form) (read reader false eof)))))))))
 
+(def default-keywords
+  [:html :body :*])
+
 (defn all-project-keywords []
   (->> (file-seq (clojure.java.io/file "src"))
        (filter #(.isFile %))
        (filter #(not (clojure.string/ends-with? (.getName %) ".cljc")))
-       (#(mapcat all-keywords-in-file %))))
+       (#(mapcat all-keywords-in-file %))
+       (into default-keywords)))
 
 ;; N.B not actually used but it's seems cool to be able to detect keywords
 ;; using the internal keyword table. It brings in all 3rd party code too,
@@ -145,8 +149,12 @@
     (map #(.get %) (vals (.get f nil)))))
 
 (defn purge-and-generate-styles [path]
-  (spit path (internal-generate-styles (purge-styles all (all-project-keywords)))))
+  (spit path (internal-generate-styles
+               (purge-styles all (all-project-keywords))
+               (purge-styles components (all-project-keywords)))))
 
 (defn purge-and-generate-styles-with [path css-file]
-  (spit path (str (internal-generate-styles (purge-styles all (all-project-keywords))) (slurp css-file))))
+  (spit path (str (internal-generate-styles
+                    (purge-styles all (all-project-keywords))
+                    (purge-styles components (all-project-keywords))) (slurp css-file))))
 
