@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```
-[com.hypalynx/sail "0.6.9"]
-{com.hypalynx/sail {:mvn/version "0.6.9"}}
+[com.hypalynx/sail "0.6.10"]
+{com.hypalynx/sail {:mvn/version "0.6.10"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -65,6 +65,13 @@ sits at the bottom.
 
 display: -webkit-inline-box;
 display: inline-flex;
+
+## Technical Differences
+
+Sail aims to be 100% compliant with Tailwind CSS but there are some additional
+classes added to make the library easier to use. For example classes with `/`
+is them are not valid keywords when used directly so we have alternate tags in
+addition to the originals e.g `w-1/2 & w-1-2`
 
 ## Releasing
 
