@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```
-[sail/sail "0.6.0"]
-{sail/sail {:mvn/version "0.6.0"}}
+[sail/sail "0.6.1"]
+{sail/sail {:mvn/version "0.6.1"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -44,6 +44,10 @@ Include the following in your build sequence to get your css:
 ;; generates all tailwind classes to use in production, this will only generate
 ;; styles that you've used in your project
 (sail/purge-and-generate-styles "styles.gen.css")
+
+;; same as above but with purging (for tailwind css only, custom styles are
+;; just appended.
+(sail/purge-and-generate-styles-with "styles.gen.css" "my-custom-styles.css")
 ```
 
 ## Implementation notes

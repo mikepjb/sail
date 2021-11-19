@@ -122,8 +122,8 @@
     (map #(.get %) (vals (.get f nil)))))
 
 (defn purge-and-generate-styles [path]
-  (spit path (internal-generate-styles (purge-styles all all-project-keywords))))
+  (spit path (internal-generate-styles (purge-styles all (all-project-keywords)))))
 
 (defn purge-and-generate-styles-with [path css-file]
-  (spit path (str (internal-generate-styles (purge-styles all all-project-keywords)) (slurp css-file))))
+  (spit path (str (internal-generate-styles (purge-styles all (all-project-keywords))) (slurp css-file))))
 
