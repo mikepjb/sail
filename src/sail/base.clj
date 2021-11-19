@@ -48,7 +48,7 @@
            :line-height 1.5}
     
     ;; Allow adding a border to an element by just adding a border-width.
-    [:* (keyword "*::before") (keyword "*::after")] {:border-width 0 :border-style "solid" :border-color (:gray-300 palette)}
+    [:* (keyword "::before") (keyword "::after")] {:border-width 0 :border-style "solid" :border-color (:gray-300 palette)}
 
     ;; Ensure horizontal rules are visible by default
     :hr {:border-top-width "1px"}

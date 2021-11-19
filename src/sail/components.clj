@@ -124,6 +124,7 @@
             :border-double {:border-style "double"}
             :border-none {:border-style "none"}
             :border-0 {:border-width "0"}
+            :border {:border-width "1px"}
             :border-1 {:border-width "1px"}
             :border-2 {:border-width "2px"}
             :border-4 {:border-width "4px"}
