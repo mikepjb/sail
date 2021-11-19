@@ -1,4 +1,4 @@
-.PHONY: all test clean build
+.PHONY: all clean test build-jar
 
 clean:
 	rm -rf target/*
@@ -12,6 +12,8 @@ lint:
 test:
 	clojure -M:test -m kaocha.runner
 
-build:
+build-jar: 
 	rm sail.jar && clj -A:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar 
+
+build: test build-jar
 

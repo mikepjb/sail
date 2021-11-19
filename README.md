@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```
-[com.hypalynx/sail "0.6.12"]
-{com.hypalynx/sail {:mvn/version "0.6.12"}}
+[com.hypalynx/sail "0.6.13"]
+{com.hypalynx/sail {:mvn/version "0.6.13"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -76,9 +76,7 @@ addition to the originals e.g `w-1/2 & w-1-2`
 ## Releasing
 
 ```
-rm sail.jar
-clj -A:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
-# mvn deploy
+make build
 CLOJARS_USERNAME="x" CLOJARS_PASSWORD="y" clj -A:deploy
 ```
 

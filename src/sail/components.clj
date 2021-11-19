@@ -198,6 +198,7 @@
    :justify-end {:-webkit-box-pack "end" :justify-content "flex-end"}
    :justify-center {:-webkit-box-pack "center" :justify-content "center"}
    :justify-between {:-webkit-box-pack "justify" :justify-content "space-between"}
+   :justify-evenly {:-webkit-box-pack "space-evenly" :justify-content "space-evenly"}
    :justify-around {:justify-content "space-around"}
    :content-center {:align-content "center"}
    :content-start {:align-content "flex-start"}
