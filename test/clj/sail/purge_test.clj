@@ -25,6 +25,10 @@
   (testing "We can split :div.md-4 style keywords found in our source code"
     (is (= (sail/split-tags-and-classes [:span.text-red-500.p-4])
            [:span :text-red-500 :p-4])))
+
+  (testing "We avoid splitting multi-level class keys"
+    (is (= (sail/split-tags-and-classes [[:* (keyword "::before") (keyword "::after")] :span.text-red-500.p-4])
+           [[:* (keyword "::before") (keyword "::after")] :span :text-red-500 :p-4])))
   
   (testing "Splitting multiple keywords will result in a single seq"
     (is (= (sail/split-tags-and-classes [:span.text-red-500.p-4 :div.flex.flex-col.items-center.shadow])
@@ -53,4 +57,13 @@
                 (sail/internal-generate-styles
                   (sail/purge-styles sail/all [:span.text-red-500 :body.p-4 :div.m-4.bg-green-300 :bg-red-400])
                   (sail/purge-styles components [:span.text-red-500 :body.p-4 :div.m-4.bg-green-300 :bg-red-400]))
-                "text-pink-800")))))
+                "text-pink-800")))
+    
+    (testing "We avoid purging multi-level used classes"
+      (is (= (sail/purge-styles sail/all [:text-red-500 :body :bg-green-300 :bg-red-400 [:* (keyword "::before") (keyword "::after")]])
+             [:body {:margin 0}
+              [:* (keyword "::before") (keyword "::after")] {:boxing-size "inherit"}
+              [:* (keyword "::before") (keyword "::after")] {:border-width 0 :border-style "solid" :border-color "#e2e8f0"}
+              :bg-red-400 {:background-color "#fc8181"}
+              :bg-green-300 {:background-color "#9ae6b4"}
+              :text-red-500 {:color "#f56565"}])))))

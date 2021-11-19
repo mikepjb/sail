@@ -99,10 +99,12 @@
   (reduce
     (fn [coll tag]
       (into coll 
-            (-> tag
-                name
-                (clojure.string/split #"\.")
-                (#(map keyword %)))))
+            (if (keyword? tag)
+              (-> tag
+                  name
+                  (clojure.string/split #"\.")
+                  (#(map keyword %)))
+              [tag])))
     [] tags))
 
 ;; used-css-classes aren't just classes but 'keywords' like body/html, psedo tags etc
