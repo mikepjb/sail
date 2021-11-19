@@ -127,7 +127,7 @@
                     (recur (conj acc form) (read reader false eof)))))))))
 
 (def default-keywords
-  [:html :body :* [:* :::before :::after])
+  [:html :body :* [:* (keyword "::before") (keyword "::after")]])
 
 (defn all-project-keywords []
   (->> (file-seq (clojure.java.io/file "src"))
