@@ -114,11 +114,36 @@
                     coll))
                 [] (partition 2 css-styles))))
 
+(defn all-keywords-in-file [filepath]
+  (let [reader (java.io.PushbackReader. (clojure.java.io/reader filepath))
+        eof (Object.)
+        flatten-completely (fn [x] (if (seqable? x)
+                                     (mapcat flatten-completely x)
+                                     [x]))]
+    (set
+      (filter keyword?
+              (flatten-completely
+                (loop [acc []
+                       form (read reader false eof)]
+                  (if (identical? eof form)
+                    acc
+                    (recur (conj acc form) (read reader false eof)))))))))
+
 (defn all-project-keywords []
+  (->> (file-seq (clojure.java.io/file "src"))
+       (filter #(.isFile %))
+       (#(mapcat all-keywords-in-file %))))
+
+;; N.B not actually used but it's seems cool to be able to detect keywords
+;; using the internal keyword table. It brings in all 3rd party code too,
+;; including sail which has many of the keywords, without being able to filter
+;; on namespace it's pretty unusable.
+(defn- hopeful-all-project-keywords []
   "Traverses project source code returning all keywords (incl. 3rd party code).
   This is important so we can only include tailwind classes that have been used."
   (let [f (.getDeclaredField clojure.lang.Keyword "table")]
     (.setAccessible f true)
+    (.get f nil)
     (map #(.get %) (vals (.get f nil)))))
 
 (defn purge-and-generate-styles [path]

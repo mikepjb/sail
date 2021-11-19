@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```
-[sail/sail "0.6.1"]
-{sail/sail {:mvn/version "0.6.1"}}
+[sail/sail "0.6.2"]
+{sail/sail {:mvn/version "0.6.2"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -77,6 +77,7 @@ CLOJARS_USERNAME="x" CLOJARS_PASSWORD="y" clj -A:deploy
 
 ## TODO
 
+- [ ] do not assume all source files are in "src"
 - [ ] ensure font-sans is prefixed as .font-sans
 - [ ] consume all classes from tailwindcss npm (make this easy to re-run as new
   versions are released)
