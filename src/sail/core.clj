@@ -114,12 +114,14 @@
                     coll))
                 [] (partition 2 css-styles))))
 
+(defn- flatten-completely [x]
+  (fn [x] (if (seqable? x)
+            (mapcat flatten-completely x)
+            [x])))
+
 (defn all-keywords-in-file [filepath]
   (let [reader (java.io.PushbackReader. (clojure.java.io/reader filepath))
-        eof (Object.)
-        flatten-completely (fn [x] (if (seqable? x)
-                                     (mapcat flatten-completely x)
-                                     [x]))]
+        eof (Object.)]
     (set
       (filter keyword?
               (flatten-completely
