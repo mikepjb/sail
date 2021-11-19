@@ -129,7 +129,7 @@
 (defn all-project-keywords []
   (->> (file-seq (clojure.java.io/file "src"))
        (filter #(.isFile %))
-       (filter #(not (ends-with? (.getName %) ".cljc")))
+       (filter #(not (clojure.string/ends-with? (.getName %) ".cljc")))
        (#(mapcat all-keywords-in-file %))))
 
 ;; N.B not actually used but it's seems cool to be able to detect keywords
