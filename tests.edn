@@ -1,0 +1,7 @@
+#kaocha/v1
+{:tests [{:id          :unit
+          :test-paths  ["test" "src"]
+          :ns-patterns [".*"]}]
+          ;; :reporter kaocha.report.progress/report
+          ;; :plugins [:kaocha.plugin/profiling :kaocha.plugin/notifier]
+ }

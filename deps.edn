@@ -4,6 +4,7 @@
                               nrepl {:mvn/version "RELEASE"}}
                  :main-opts ["-m" "nrepl.cmdline"
                              "-middleware" "[cider.nrepl/cider-middleware]"]}
+           :test {:extra-paths ["test/clj"] :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.945"}}}
            :pack {:extra-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"
                                                 :sha "d9023b24c3d589ba6ebc66c5a25c0826ed28ead5"}
                                javax.xml.bind/jaxb-api {:mvn/version "2.4.0-b180830.0359"}}

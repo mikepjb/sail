@@ -80,27 +80,50 @@
 
 (def all (reduce into [normalize base components accessibility]))
 
+(defn internal-generate-styles [css-styles]
+  (str (style->string css-styles)
+       (with-responsive-prefix components "sm" "640px")
+       (with-responsive-prefix components "md" "768px")
+       (with-responsive-prefix components "sm" "1024px")
+       (with-responsive-prefix components "sm" "1024px")))
+
 (defn generate-styles [path]
-  (spit path
-        (str (style->string all)
-             (with-responsive-prefix components "sm" "640px")
-             (with-responsive-prefix components "md" "768px")
-             (with-responsive-prefix components "sm" "1024px")
-             (with-responsive-prefix components "sm" "1024px"))))
+  (spit path (internal-generate-styles all)))
 
-;; (generate-styles "styles.gen.css")
+(defn generate-styles-with
+  "Generate Tailwind CSS and append the provided css-file on the end."
+  [path css-file]
+  (spit path (str (internal-generate-styles all) (slurp css-file))))
 
-;; TODO use this for dead code elimination
-;; https://clojureverse.org/t/list-all-unique-keywords-in-current-project/4024/5
-;; loads all keywords
-;; need to:
-;;   - find html keyword prefixed keywords e.g :div.bg-gray-300.text-gray-900
-;;   - split those keywords by . -> [:bg-gray-300 :text-gray-900]
-;;   - filter out the keywords that don't match from 'all'.
+(defn split-tags-and-classes [tags]
+  (reduce
+    (fn [coll tag]
+      (into coll 
+            (-> tag
+                name
+                (clojure.string/split #"\.")
+                (#(map keyword %)))))
+    [] tags))
+
+;; used-css-classes aren't just classes but 'keywords' like body/html, psedo tags etc
+(defn purge-styles [css-styles used-css-classes]
+  (let [split-used-css-classes (split-tags-and-classes used-css-classes)]
+        (reduce (fn [coll [k v]]
+                  (if (some #{k} split-used-css-classes)
+                    (into coll [k v])
+                    coll))
+                [] (partition 2 css-styles))))
+
 (defn all-project-keywords []
   "Traverses project source code returning all keywords (incl. 3rd party code).
   This is important so we can only include tailwind classes that have been used."
   (let [f (.getDeclaredField clojure.lang.Keyword "table")]
     (.setAccessible f true)
     (map #(.get %) (vals (.get f nil)))))
+
+(defn purge-and-generate-styles [path]
+  (spit path (internal-generate-styles (purge-styles all all-project-keywords))))
+
+(defn purge-and-generate-styles-with [path css-file]
+  (spit path (str (internal-generate-styles (purge-styles all all-project-keywords)) (slurp css-file))))
 

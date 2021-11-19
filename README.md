@@ -2,7 +2,7 @@
 
 Use Tailwind CSS classes in Clojure, batteries included.
 
-## why?
+## Why?
 
 I want to use tailwindcss in Clojure without involving extra dependencies e.g
 npm/node/javascript/postcss/autoprefixer, especially not when this can be done
@@ -20,42 +20,30 @@ library, without the you (the library user) having to depend on npm/node.
 **Sail is essentially a Clojure port of the Tailwind CSS workflow/build system
 I love to use.**
 
-## TODO
+## Getting Started
 
-- [ ] ensure font-sans is prefixed as .font-sans
-- [ ] consume all classes from tailwindcss npm (make this easy to re-run as new
-  versions are released)
-- [ ] autoprefix css rules that require it.
-- [ ] purgecss style dead code elimination
-  - N.B using keywords alone with strip out uses in html e.g index.html base
-    page.
-- [X] describe/find a clean way of tacking this onto a project? e.g already
-  using sass?
-- [X] cssnano, minification?
-- [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
-  - most likely a cljs npm language-server will do the trick.
-  writing hiccup is important though for this workflow.)
-- [X] add in all default colors
-- [ ] how to use guide
-- [ ] clean up components code (mostly putting things under the correct names)
-- [ ] include placeholder classes
-- [ ] .container
-- [X] .sr-only
-- [X] include media queries
-- [ ] consider adding text-decoration-style (add PR to tailwindcss repo) https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
+Include sail as a dependency in your project: 
+```
+[sail/sail "0.6.0"]
+{sail/sail {:mvn/version "0.6.0"}}
+```
 
-## Usage [work in progress]
-
-`[sail "0.5.9"]`
-`{sail {:mvn/version "0.5.9"}}`
-
+Require it in a namespace, like dev.user:
 ```
 (require '[sail.core :as sail]')
+```
 
+Include the following in your build sequence to get your css:
+```
 ;; generates all tailwind classes to use in development
 (sail/generate-styles "styles.gen.css")
 
-;; currently no function to eliminate unused classes
+;; generates tailwind classes and includes custom css that you provide
+(sail/generate-styles-with "styles.gen.css" "my-custom-styles.css")
+
+;; generates all tailwind classes to use in production, this will only generate
+;; styles that you've used in your project
+(sail/purge-and-generate-styles "styles.gen.css")
 ```
 
 ## Implementation notes
@@ -82,6 +70,31 @@ clj -A:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
 # mvn deploy
 CLOJARS_USERNAME="x" CLOJARS_PASSWORD="y" clj -A:deploy
 ```
+
+## TODO
+
+- [ ] ensure font-sans is prefixed as .font-sans
+- [ ] consume all classes from tailwindcss npm (make this easy to re-run as new
+  versions are released)
+- [ ] autoprefix css rules that require it.
+- [X] purgecss style dead code elimination
+  - N.B using keywords alone with strip out uses in html e.g index.html base
+    page.
+- [X] describe/find a clean way of tacking this onto a project? e.g already
+  using sass?
+- [X] cssnano, minification?
+- [ ] autocomplete (maybe not part of this lib, autocompleting css classes when
+  - most likely a cljs npm language-server will do the trick.
+  writing hiccup is important though for this workflow.)
+- [X] add in all default colors
+- [ ] how to use guide
+- [ ] clean up components code (mostly putting things under the correct names)
+- [ ] include placeholder classes
+- [ ] .container
+- [X] .sr-only
+- Check :hover\:border-green-800:hover.. seems wrong to have hover at both ends (seen in generated all-project-keywords for sail project)
+- [X] include media queries
+- [ ] consider adding text-decoration-style (add PR to tailwindcss repo) https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-style
 
 ## Reference
 
