@@ -21,7 +21,8 @@
         input-stream (string->stream file)
         _ (.parseStyleElement ssp ac input-stream nil usermedium (new URL filename) 0)
         stylesheet (.getStyleSheet ssp)
-        _ (.findConflicts stylesheet ac)]
+        _ (.findConflicts stylesheet ac)
+        error-count (.getErrorCount (.getErrors stylesheet))]
 
     {:error-count error-count
      :errors (map (fn [n]
@@ -30,7 +31,13 @@
 
 (deftest generated-css-correctness
   (testing "the unpurged css we generate is valid according to the w3c css validator"
-    (let [file (core/internal-generate-styles core/all components/components)
-          results (validate file)]
+    (let [css-text (core/internal-generate-styles core/all components/components)
+          results (validate css-text)]
       
       (is (= (:error-count results) 0)))))
+
+(comment
+  (def css-text (core/internal-generate-styles core/all components/components))
+  (doseq [n (take 20 (:errors (validate css-text)))]
+    (prn n))
+  )
