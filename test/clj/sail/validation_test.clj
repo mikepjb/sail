@@ -29,7 +29,7 @@
         ac (new ApplContext "en")
         usermedium "all"
         ssp (new StyleSheetParser ac)
-        input-stream (string->stream file)
+        input-stream (string->stream css-text)
         _ (.parseStyleElement ssp ac input-stream nil usermedium (new URL filename) 0)
         stylesheet (.getStyleSheet ssp)
         _ (.findConflicts stylesheet ac)
@@ -41,7 +41,7 @@
                           (.getMessage (.getException (.getErrorAt (.getErrors stylesheet) n))))
                         (.getMessage (.getException (.getErrorAt (.getErrors stylesheet) n)))
                       )))
-                    (take 100 (range 0 error-count)))
+                    (take 100 (range 0 initial-error-count)))
         error-count (count errors)]
 
     {:error-count error-count

@@ -1,4 +1,4 @@
-{:paths ["src" "resources"]
+{:paths ["src/clj" "src/cljc" "resources"]
  :deps {org.clojure/clojure {:mvn/version "1.10.0"}}
  :aliases {:dev {:extra-deps {cider/cider-nrepl {:mvn/version "0.22.4"}
                               nrepl {:mvn/version "RELEASE"}}
