@@ -13,7 +13,7 @@ test:
 	clojure -M:test -m kaocha.runner
 
 build-jar: 
-	rm sail.jar && clj -A:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar 
+	rm sail.jar && clj -M:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
 
 build: test build-jar
 
