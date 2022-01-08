@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```
-[com.hypalynx/sail "0.6.15"]
-{com.hypalynx/sail {:mvn/version "0.6.15"}}
+[com.hypalynx/sail "0.6.16"]
+{com.hypalynx/sail {:mvn/version "0.6.16"}}
 ```
 
 Require it in a namespace, like dev.user:
