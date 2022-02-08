@@ -507,8 +507,8 @@
    :shadow-inner {:box-shadow "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)"}
    :shadow-none {:box-shadow "none"}])
 
-(def shadow-color (rgba-color-class "shadow" "--tw-shadow-color" "--tw-shadow" 50))
-;; (take 4 (rgba-color-class "shadow" "--tw-shadow-color" "--tw-shadow" 50))
+(def shadow-color (rgba-color-class "shadow" "--tw-shadow" "--tw-shadow-color" 0.5))
+;; (take 4 (rgba-color-class "shadow" "--tw-shadow" "--tw-shadow-color" 50))
 
 (def text-style
   [:text-xs {:font-size "0.75rem"}

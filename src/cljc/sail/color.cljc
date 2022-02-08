@@ -13,7 +13,7 @@
                         (map #(s/join (repeat 2 %)) hs)
                         (map #(s/join %) (partition 2 hs)))))
             ((fn [hs] (map #(Integer/parseInt % 16) hs))))]
-    (str "rgb(" (s/join " " (into [] hex-values)) " / " opacity ")")))
+    (str "rgb(" (s/join " " (into [] hex-values)) "/" opacity ")")))
 
 ;; (hex->rgba "#fff" 50)
 ;; (hex->rgba "#f0e333" 50)
@@ -153,6 +153,6 @@
   "Generates the css classes for a given property, for all colors."
   (reduce (fn [coll [color hex]]
             (into coll [(keyword (str prefix "-" (name color)))
-                        {(keyword property) hex
+                        {(keyword property) "var(--tw-shadow-colored)"
                          (keyword rgba-property) (hex->rgba hex opacity)}]))
           [] palette))
