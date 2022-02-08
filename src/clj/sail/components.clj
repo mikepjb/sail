@@ -594,8 +594,8 @@
                   :scrolling-auto {:-webkit-overflow-scrolling "auto"}]
                  base-shadow
                  shadow-color
-                 (with-pseudo-class "hover" shadow)
-                 (with-pseudo-class "focus" shadow)
+                 (with-pseudo-class "hover" base-shadow)
+                 (with-pseudo-class "focus" base-shadow)
                  [:fill-current {:fill "currentColor"}
                   :stroke-current {:stroke "currentColor"}
                   :table-auto {:table-layout "auto"}
