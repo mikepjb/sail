@@ -56,9 +56,9 @@
 (defn ->selector [k]
   "Write key as CSS selectors, can be single or a sequence."
   (let [x (fn [n] (-> n name prefix))]
-    (if (vector? k)
-      (clojure.string/join "," (map x k))
-      (x k))))
+    (-> (if (vector? k)
+          (clojure.string/join "," (map x k))
+          (x k)) (clojure.string/replace #":" "\\\\:"))))
 
 (defn style->string [smap]
   (reduce

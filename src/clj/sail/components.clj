@@ -175,10 +175,10 @@
    :flex-row-reverse [:-webkit-box-orient "horizontal"
                       :-webkit-box-direction "reverse"
                       :flex-direction "row-reverse"]
-   :flex-col [:-webkit-box-orient "horizontal"
+   :flex-col [:-webkit-box-orient "vertical"
               :-webkit-box-direction "normal"
               :flex-direction "column"]
-   :flex-col-reverse [:-webkit-box-orient "horizontal"
+   :flex-col-reverse [:-webkit-box-orient "vertical"
                       :-webkit-box-direction "reverse"
                       :flex-direction "column-reverse"]
    :flex-wrap {:flex-wrap "wrap"}

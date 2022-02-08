@@ -47,15 +47,14 @@
     {:error-count error-count
      :errors errors}))
 
-(deftest generated-css-correctness
+(deftest ^:kaocha/pending generated-css-correctness
   (testing "the unpurged css we generate is valid according to the w3c css validator"
     (let [css-text (core/internal-generate-styles core/all components/components)
           results (validate css-text)]
       
       (is (= (:error-count results) 0)))))
 
-;; (comment
+(comment
   (def css-text (core/internal-generate-styles core/all components/components))
   (doseq [n (:errors (validate css-text))]
-    (prn n))
-  ;; )
+    (prn n)))
