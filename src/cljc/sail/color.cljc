@@ -1,6 +1,6 @@
 (ns sail.color
   (:require [clojure.string :as s])
-  (:import [java.lang Integer]))
+  #?(:clj (:import [java.lang Integer])))
 
 (Integer/parseInt "f0" 16)
 
@@ -12,7 +12,8 @@
             ((fn [hs] (if (= 3 (count hs)) ;; convert 3 char hex -> 6 char hex
                         (map #(s/join (repeat 2 %)) hs)
                         (map #(s/join %) (partition 2 hs)))))
-            ((fn [hs] (map #(Integer/parseInt % 16) hs))))]
+            ((fn [hs] (map #(#?(:clj Integer/parseInt
+                                :cljs parseInt) % 16) hs))))]
     (str "rgb(" (s/join " " (into [] hex-values)) "/" opacity ")")))
 
 ;; (hex->rgba "#fff" 50)
