@@ -1,5 +1,5 @@
 (ns sail.components
-  (:require [sail.color :refer [palette color-class]]))
+  (:require [sail.color :refer [palette color-class rgba-color-class]]))
 
 ;; (defn with-media-query)
 (defn with-pseudo-class
@@ -468,15 +468,47 @@
       (into coll [(str "opacity-" (name k)) {:opacity v}]))
     [] {:0 0 :25 0.25 :50 0.5 :75 0.75 :100 1}))
 
-(def shadow
-  [:shadow {:box-shadow "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)"}
-   :shadow-md {:box-shadow "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"}
-   :shadow-lg {:box-shadow "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"}
-   :shadow-xl {:box-shadow "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"}
-   :shadow-2xl {:box-shadow "0 25px 50px -12px rgba(0, 0, 0, 0.25)"}
+;; How does Tailwind v3 shadows work with the new color feature?
+
+;; 1. shadow classes e.g shadow-lg has:
+;;   a. --tw-shadow with the standard/original rule
+;;   b. --tw-shadow-colored with the original rule + color variables
+;; 2. there is an additional [:shadow :shadow-lg]] level that actually defines
+;; the box-shadow css rule using --tw-shadow
+;; 3. IF a shadow color rule e.g shadow-cyan-500-50 is included
+;;   a. the rule overwrites --tw-shadow so that the colored rule overwrites the
+;;   --tw-shadow rule included by the base class.
+
+;; for now: base shadow is a single class and opacity is default 50 only (until
+;; we also implement JIT to avoid dev slowdown)
+
+    
+
+(def base-shadow
+  [:shadow     {:--tw-shadow "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
+                :--tw-shadow-colored "0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color)"
+                :box-shadow "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)"}
+   :shadow-sm  {:--tw-shadow "0 1px 2px 0 rgb(0 0 0 / 0.05)"
+                :--tw-shadow-colored "0 1px 2px 0 var(--tw-shadow-color)"
+                :box-shadow "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)"}
+   :shadow-md  {:--tw-shadow "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)"
+                :--tw-shadow-colored "0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color)"
+                :box-shadow "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)"}
+   :shadow-lg  {:--tw-shadow "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+                :--tw-shadow-colored "0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color)"
+                :box-shadow "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)"}
+   :shadow-xl  {:--tw-shadow "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+                :--tw-shadow-colored "20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color)"
+                :box-shadow "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)"}
+   :shadow-2xl {:--tw-shadow "0 25px 50px -12px rgb(0 0 0 / 0.25)"
+                :--tw-shadow-colored "0 25px 50px -12px var(--tw-shadow-color)"
+                :box-shadow "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)"}
+
    :shadow-inner {:box-shadow "inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)"}
-   :shadow-outline {:box-shadow "0 0 0 3px rgba(66, 153, 225, 0.5)"}
    :shadow-none {:box-shadow "none"}])
+
+(def shadow-color (rgba-color-class "shadow" "--tw-shadow-color" "--tw-shadow" 50))
+;; (take 4 (rgba-color-class "shadow" "--tw-shadow-color" "--tw-shadow" 50))
 
 (def text-style
   [:text-xs {:font-size "0.75rem"}
@@ -560,7 +592,8 @@
                   :overflow-y-scroll {:overflow-y "scroll"}
                   :scrolling-touch {:-webkit-overflow-scrolling "touch"}
                   :scrolling-auto {:-webkit-overflow-scrolling "auto"}]
-                 shadow
+                 base-shadow
+                 shadow-color
                  (with-pseudo-class "hover" shadow)
                  (with-pseudo-class "focus" shadow)
                  [:fill-current {:fill "currentColor"}

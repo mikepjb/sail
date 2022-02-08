@@ -1,8 +1,36 @@
-(ns sail.color)
+(ns sail.color
+  (:require [clojure.string :as s])
+  (:import [java.lang Integer]))
+
+(Integer/parseInt "f0" 16)
+
+(defn hex->rgba [hex opacity]
+  (let [hex-values
+        (-> hex
+            (s/replace #"#" "")
+            (s/split #"")
+            ((fn [hs] (if (= 3 (count hs)) ;; convert 3 char hex -> 6 char hex
+                        (map #(s/join (repeat 2 %)) hs)
+                        (map #(s/join %) (partition 2 hs)))))
+            ((fn [hs] (map #(Integer/parseInt % 16) hs))))]
+    (str "rgb(" (s/join " " (into [] hex-values)) " / " opacity ")")))
+
+;; (hex->rgba "#fff" 50)
+;; (hex->rgba "#f0e333" 50)
 
 (def palette
   {:white "#fff"
    :black "#000"
+   :slate-50 "#f8fafc"
+   :slate-100 "#f1f5f9"
+   :slate-200 "#e2e8f0"
+   :slate-300 "#cbd5e1"
+   :slate-400 "#94a3b8"
+   :slate-500 "#64748b"
+   :slate-600 "#475569"
+   :slate-700 "#334155"
+   :slate-800 "#1e293b"
+   :slate-900 "#0f172a"
    :gray-100 "#f7fafc"
    :gray-200 "#edf2f7"
    :gray-300 "#e2e8f0"
@@ -67,6 +95,16 @@
    :teal-700 "#2c7a7b"
    :teal-800 "#285e61"
    :teal-900 "#234e52"
+   :cyan-50  "#ecfeff"
+   :cyan-100 "#cffafe"
+   :cyan-200 "#a5f3fc"
+   :cyan-300 "#67e8f9"
+   :cyan-400 "#22d3ee"
+   :cyan-500 "#06b6d4"
+   :cyan-600 "#0891b2"
+   :cyan-700 "#0e7490"
+   :cyan-800 "#155e75"
+   :cyan-900 "#164e63"
    :blue-100 "#ebf8ff"
    :blue-200 "#bee3f8"
    :blue-300 "#90cdf4"
@@ -109,4 +147,12 @@
   (reduce (fn [coll [color hex]]
             (into coll [(keyword (str prefix "-" (name color)))
                         {(keyword property) hex}]))
+          [] palette))
+
+(defn rgba-color-class [prefix property rgba-property opacity]
+  "Generates the css classes for a given property, for all colors."
+  (reduce (fn [coll [color hex]]
+            (into coll [(keyword (str prefix "-" (name color)))
+                        {(keyword property) hex
+                         (keyword rgba-property) (hex->rgba hex opacity)}]))
           [] palette))
