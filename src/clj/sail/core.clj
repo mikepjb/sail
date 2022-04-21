@@ -84,8 +84,8 @@
   (str (style->string css-styles)
        (with-responsive-prefix css-components-styles "sm" "640px")
        (with-responsive-prefix css-components-styles "md" "768px")
-       (with-responsive-prefix css-components-styles "sm" "1024px")
-       (with-responsive-prefix css-components-styles "sm" "1024px")))
+       (with-responsive-prefix css-components-styles "lg" "1024px")
+       (with-responsive-prefix css-components-styles "xl" "1024px")))
 
 (defn generate-styles [path]
   (spit path (internal-generate-styles all components)))
