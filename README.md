@@ -23,18 +23,18 @@ I love to use.**
 ## Getting Started
 
 Include sail as a dependency in your project: 
-```
+```clojure
 [com.hypalynx/sail "0.7.3"]
 {com.hypalynx/sail {:mvn/version "0.7.3"}}
 ```
 
 Require it in a namespace, like dev.user:
-```
+```clojure
 (require '[sail.core :as sail]')
 ```
 
 Include the following in your build sequence to get your css:
-```
+```clojure
 ;; generates all tailwind classes to use in development
 (sail/generate-styles "styles.gen.css")
 
