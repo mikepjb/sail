@@ -13,7 +13,11 @@ test:
 	clojure -M:test -m kaocha.runner
 
 build-jar: 
-	rm sail.jar && clj -M:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
+	if [ -f sail.jar ]; then rm sail.jar; fi && clj -M:pack mach.pack.alpha.skinny --no-libs --project-path sail.jar
 
-build: test build-jar
+deploy:
+	CLOJARS_USERNAME="mikepjb" CLOJARS_PASSWORD=$$(pass show clojars-deploy) clojure -A:deploy
+
+# build: test build-jar deploy
+build: build-jar deploy
 
