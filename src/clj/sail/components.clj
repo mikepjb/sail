@@ -183,7 +183,7 @@
                       :flex-direction "column-reverse"]
    :flex-wrap {:flex-wrap "wrap"}
    :flex-wrap-reverse {:flex-wrap "wrap-reverse"}
-   :flex-no-wrap {:flex-wrap "nowrap"}
+   :flex-nowrap {:flex-wrap "nowrap"}
    :items-start {:-webkit-box-align "start" :align-items "flex-start"}
    :items-end {:-webkit-box-align "end" :align-items "flex-end"}
    :items-center {:-webkit-box-align "center" :align-items "center"}
@@ -631,7 +631,7 @@
                   :visible {:visibility "visible"}
                   :invisible {:visibility "hidden"}
                   :whitespace-normal {:white-space "normal"}
-                  :whitespace-no-wrap {:white-space "nowrap"}
+                  :whitespace-nowrap {:white-space "nowrap"}
                   :whitespace-pre {:white-space "pre"}
                   :whitespace-pre-line {:white-space "pre-line"}
                   :whitespace-pre-wrap {:white-space "pre-wrap"}
