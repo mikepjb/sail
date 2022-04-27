@@ -46,7 +46,7 @@
 (def border
   (reduce into
           [[:border-collapse {:border-collapse "collapse"}
-            :border-seperate {:border-collapse "seperate"}
+            :border-separate {:border-collapse "separate"}
             :border-transparent {:border-collapse "transparent"}]
            (color-class "border" "border-color")
            (with-pseudo-class "hover" (color-class "border" "border-color"))
