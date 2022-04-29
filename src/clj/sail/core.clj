@@ -58,7 +58,7 @@
   (let [x (fn [n] (-> n name prefix))]
     (-> (if (vector? k)
           (clojure.string/join "," (map x k))
-          (x k)) (clojure.string/replace #":" "\\\\:"))))
+          (x k)))))
 
 (defn style->string [smap]
   (reduce
@@ -75,7 +75,7 @@
   (str "@media (min-width: " screen-width "){"
   (style->string
     (reduce (fn [coll [k v]]
-              (into coll [(str prefix k) v]))
+              (into coll [(str prefix "\\" k) v]))
             [] (partition 2 smap))) "}"))
 
 (def all (reduce into [normalize base components accessibility]))
