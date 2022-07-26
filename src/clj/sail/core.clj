@@ -3,7 +3,8 @@
             [sail.normalize :refer [normalize]]
             [sail.base :refer [base]]
             [sail.components :refer [components]]
-            [sail.accessibility :refer [accessibility]]))
+            [sail.accessibility :refer [accessibility]]
+            [sail.transition :refer [transition]]))
 
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
@@ -78,7 +79,7 @@
               (into coll [(str prefix "\\" k) v]))
             [] (partition 2 smap))) "}"))
 
-(def all (reduce into [normalize base components accessibility]))
+(def all (reduce into [normalize base components accessibility transition]))
 
 (defn internal-generate-styles [css-styles css-components-styles]
   (str (style->string css-styles)
