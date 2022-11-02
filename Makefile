@@ -4,7 +4,7 @@ clean:
 	rm -rf target/*
 
 repl:
-	clojure -M:nrepl:dev:test
+	clojure -M:dev:test:nrepl
 
 lint:
 	clojure -M:dev -m clj-kondo.main --lint src/**

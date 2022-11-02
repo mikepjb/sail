@@ -3,3 +3,5 @@
 sail.jar
 target/
 generated-style.css
+.clj-kondo
+.lsp

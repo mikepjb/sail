@@ -143,6 +143,7 @@
 ;; using the internal keyword table. It brings in all 3rd party code too,
 ;; including sail which has many of the keywords, without being able to filter
 ;; on namespace it's pretty unusable.
+;; TODO namespacing keywords would be a solution that would allow us to use this.
 (defn- hopeful-all-project-keywords []
   "Traverses project source code returning all keywords (incl. 3rd party code).
   This is important so we can only include tailwind classes that have been used."
