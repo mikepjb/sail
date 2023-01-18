@@ -1,5 +1,13 @@
 {:paths ["src/clj" "src/cljc" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.0"}}
+ :deps {org.clojure/clojure {:mvn/version "1.10.0"}
+
+        ;; works
+        ;; org.clojure/tools.logging {:mvn/version "1.2.4"}
+        ;; ch.qos.logback/logback-classic {:mvn/version "1.1.3"}
+        juxt/dirwatch {:mvn/version "0.2.5"}
+        com.taoensso/timbre {:mvn/version "6.0.1"}
+}
+ :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory"]
  :aliases {:dev {:extra-paths ["dev" "src/cljs"]
                  :extra-deps {reagent/reagent {:mvn/version "1.0.0"}
                               com.bhauman/figwheel-main {:mvn/version "0.2.12"}}}
@@ -9,6 +17,6 @@
                                                 :sha "d9023b24c3d589ba6ebc66c5a25c0826ed28ead5"}
                                javax.xml.bind/jaxb-api {:mvn/version "2.4.0-b180830.0359"}}
                   :main-opts ["-m"]}
-           :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
+           :deploy {:extra-deps {deps-deploy/deps-deploy {:mvn/version "RELEASE"}}
                     :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "sail.jar"]}}}
 

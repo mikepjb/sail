@@ -1,10 +1,20 @@
 (ns sail.core
-  (:require [clojure.string]
+  (:require [juxt.dirwatch :as dw]
+            [clojure.tools.logging :as ctl]
+            [clojure.java.io :as io]
+            [clojure.string :as s]
             [sail.normalize :refer [normalize]]
+            ;; [clojure.tools.logging.impl]
+            [taoensso.timbre :as log]
+            [taoensso.timbre.appenders.core :as log-appenders]
             [sail.base :refer [base]]
             [sail.components :refer [components]]
             [sail.accessibility :refer [accessibility]]
             [sail.transition :refer [transition]]))
+
+(log/merge-config!
+  {:appenders {:println (log-appenders/println-appender
+                          {:stream (java.io.OutputStreamWriter. System/out)})}})
 
 (defn prefix
   "Include . for class names, ignore for reserved words like 'html'."
@@ -58,7 +68,7 @@
   "Write key as CSS selectors, can be single or a sequence."
   (let [x (fn [n] (-> n name prefix))]
     (-> (if (vector? k)
-          (clojure.string/join "," (map x k))
+          (s/join "," (map x k))
           (x k)))))
 
 (defn style->string [smap]
@@ -139,26 +149,30 @@
        (#(mapcat all-keywords-in-file %))
        (into default-keywords)))
 
-;; N.B not actually used but it's seems cool to be able to detect keywords
-;; using the internal keyword table. It brings in all 3rd party code too,
-;; including sail which has many of the keywords, without being able to filter
-;; on namespace it's pretty unusable.
-;; TODO namespacing keywords would be a solution that would allow us to use this.
-(defn- hopeful-all-project-keywords []
-  "Traverses project source code returning all keywords (incl. 3rd party code).
-  This is important so we can only include tailwind classes that have been used."
-  (let [f (.getDeclaredField clojure.lang.Keyword "table")]
-    (.setAccessible f true)
-    (.get f nil)
-    (map #(.get %) (vals (.get f nil)))))
-
 (defn purge-and-generate-styles [path]
   (spit path (internal-generate-styles
                (purge-styles all (all-project-keywords))
                (purge-styles components (all-project-keywords)))))
 
 (defn purge-and-generate-styles-with [path css-file]
+  ;; TODO count how many styles are being generated? at least for debug purposes
   (spit path (str (internal-generate-styles
                     (purge-styles all (all-project-keywords))
                     (purge-styles components (all-project-keywords))) (slurp css-file))))
 
+(defn watch
+  "Watch & rebuild styles on file modified, useful when developing to view sites with purged code as you would use in production.
+  Also useful for providing the feedback when manipulating classes in Clojure e.g splitting (str \"bg-green-\" v)."
+  ([output]
+   (watch output {}))
+  ([output {:keys [input-file watch-dir]}]
+   (let [dir (or watch-dir (System/getProperty "user.dir"))]
+     (log/info (str "sail watcher started, monitoring file changes under " dir))
+     (dw/watch-dir
+       (fn [{:keys [file]}]
+         (let [path (.getAbsolutePath file)]
+           (when-not (s/includes? path output)
+                   (log/info (str "watcher requested style generation: " path))
+                   (if input-file
+                     (purge-and-generate-styles-with output input-file)
+                     (purge-and-generate-styles output))))) (io/file dir)))))
