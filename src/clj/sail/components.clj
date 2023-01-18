@@ -449,10 +449,10 @@
             :inset-y-0 {:top 0 :bottom 0}
             :inset-y-auto {:top "auto" :bottom "auto"}
             :inset-x-auto {:right "auto" :left "auto"}
-            :top-0 {:top 0}
-            :right-0 {:right 0}
-            :bottom-0 {:bottom 0}
-            :left-0 {:left 0}
+            (spacing-class "top" "top")
+            (spacing-class "right" "right")
+            (spacing-class "bottom" "bottom")
+            (spacing-class "left" "left")
             :top-auto {:top "auto"}
             :right-auto {:right "auto"}
             :bottom-auto {:bottom "auto"}
