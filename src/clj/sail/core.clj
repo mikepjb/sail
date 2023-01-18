@@ -1,5 +1,5 @@
 (ns sail.core
-  (:require [juxt.dirwatch :as dw]
+  (:require ;; [juxt.dirwatch :as dw]
             [clojure.java.io :as io]
             [clojure.string :as s]
             [sail.normalize :refer [normalize]]
@@ -159,7 +159,7 @@
                     (purge-styles all (all-project-keywords))
                     (purge-styles components (all-project-keywords))) (slurp css-file))))
 
-(defn watch
+#_(defn watch
   "Watch & rebuild styles on file modified, useful when developing to view sites with purged code as you would use in production.
   Also useful for providing the feedback when manipulating classes in Clojure e.g splitting (str \"bg-green-\" v)."
   ([output]
