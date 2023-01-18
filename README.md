@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.7.12"]
-{com.hypalynx/sail {:mvn/version "0.7.12"}}
+[com.hypalynx/sail "0.7.13"]
+{com.hypalynx/sail {:mvn/version "0.7.13"}}
 ```
 
 Require it in a namespace, like dev.user:

@@ -1,6 +1,5 @@
 (ns sail.core
   (:require [juxt.dirwatch :as dw]
-            [clojure.tools.logging :as ctl]
             [clojure.java.io :as io]
             [clojure.string :as s]
             [sail.normalize :refer [normalize]]
