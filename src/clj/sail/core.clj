@@ -1,5 +1,5 @@
 (ns sail.core
-  (:require ;; [juxt.dirwatch :as dw]
+  (:require [juxt.dirwatch :as dw]
             [clojure.java.io :as io]
             [clojure.string :as s]
             [sail.normalize :refer [normalize]]
@@ -97,9 +97,11 @@
        (with-responsive-prefix css-components-styles "lg" "1024px")
        (with-responsive-prefix css-components-styles "xl" "1024px")))
 
+;; TODO deprecated, purge should be an option
 (defn generate-styles [path]
   (spit path (internal-generate-styles all components)))
 
+;; TODO deprecated, purge should be an option
 (defn generate-styles-with
   "Generate Tailwind CSS and append the provided css-file on the end."
   [path css-file]
@@ -141,37 +143,70 @@
 (def default-keywords
   [:html :body :* [:* (keyword "::before") (keyword "::after")]])
 
-(defn all-project-keywords []
-  (->> (file-seq (clojure.java.io/file "src"))
+(defn all-project-keywords [path]
+  (->> (file-seq (clojure.java.io/file (or path "src")))
        (filter #(.isFile %))
        (filter #(not (clojure.string/ends-with? (.getName %) ".cljc")))
        (#(mapcat all-keywords-in-file %))
        (into default-keywords)))
 
-(defn purge-and-generate-styles [path]
-  (spit path (internal-generate-styles
-               (purge-styles all (all-project-keywords))
-               (purge-styles components (all-project-keywords)))))
+;; TODO generate-styles is currently over-zealous and will include used styles for ALL media queries even if they
+;; aren't used.
+;; E.g bg-red-400 is included in project code so xl:bg-red-400, lg:bg-red-400 etc are all included.
+(defn purge-and-generate-styles [output {:keys [path css-file] :as opts}]
+  (log/info (str "purge-and-generate-styles to: " output) opts)
+  (let [kws (all-project-keywords path)
+        generated-content (internal-generate-styles
+                            (purge-styles all kws)
+                            (purge-styles components kws))]
+    (spit output (if css-file
+                 (str generated-content (slurp css-file))
+                 generated-content))))
 
-(defn purge-and-generate-styles-with [path css-file]
-  ;; TODO count how many styles are being generated? at least for debug purposes
-  (spit path (str (internal-generate-styles
-                    (purge-styles all (all-project-keywords))
-                    (purge-styles components (all-project-keywords))) (slurp css-file))))
+(defonce
+  ^{:doc "Contains the dirwatch process to control sail's watching for compilation process"}
+  css-watcher (atom nil))
 
-#_(defn watch
+(defn build
+  ([output]
+   (build output {}))
+  ([output {:keys [path] :as opts}]
+   (let [dir (or path (System/getProperty "user.dir"))]
+     (purge-and-generate-styles output (merge opts {:path dir})))))
+
+(defn watcher-running? []
+  (not (nil? @css-watcher)))
+
+;; TODO watch/build fns share a lot of code, generalise the setup for both of these!
+(defn watch
   "Watch & rebuild styles on file modified, useful when developing to view sites with purged code as you would use in production.
-  Also useful for providing the feedback when manipulating classes in Clojure e.g splitting (str \"bg-green-\" v)."
+  Also useful for providing the feedback when manipulating classes in Clojure e.g splitting (str \"bg-green-\" v).
+  
+  Takes optional args:
+  :path directory to watch for new uses of css classes (e.g your project code)
+  "
   ([output]
    (watch output {}))
-  ([output {:keys [input-file watch-dir]}]
-   (let [dir (or watch-dir (System/getProperty "user.dir"))]
-     (log/info (str "sail watcher started, monitoring file changes under " dir))
-     (dw/watch-dir
-       (fn [{:keys [file]}]
-         (let [path (.getAbsolutePath file)]
-           (when-not (s/includes? path output)
-                   (log/info (str "watcher requested style generation: " path))
-                   (if input-file
-                     (purge-and-generate-styles-with output input-file)
-                     (purge-and-generate-styles output))))) (io/file dir)))))
+  ([output {:keys [path] :as opts}]
+   (let [dir (or path (System/getProperty "user.dir"))]
+         (io/make-parents output)
+         (log/info output opts)
+         (log/info "ok1")
+         (build output opts)
+         (log/info "ok2")
+         (reset! css-watcher
+                 (dw/watch-dir
+                   (fn [{:keys [file]}]
+                     (let [path (.getAbsolutePath file)]
+                       (when-not (s/includes? path output)
+                         (log/info (str "watcher requested style generation: " path))
+                         (build output opts)))) (io/file dir)))
+         (log/info (str "sail watcher started, monitoring file changes under " dir)))))
+
+(defn stop-watch []
+  (if @css-watcher
+    (do
+      (dw/close-watcher @css-watcher)
+      (reset! css-watcher nil)
+      (log/info "shutting down sail css watcher"))
+    (log/info "sail css watcher is not currently running")))

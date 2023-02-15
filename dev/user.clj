@@ -1,6 +1,6 @@
 (ns user
   (:require [figwheel.main.api :as figwheel]
-            [juxt.dirwatch :as dw]
+            ;; [juxt.dirwatch :as dw]
             [clojure.java.shell :refer [sh]]
             [sail.core :as sail]))
 
@@ -15,18 +15,19 @@
               :connect-url "http://172.27.74.87:9500/figwheel-connect" ;; for WSL2 only
               }}))
 
-(def css-watcher (atom nil))
-
 (defn start-css-watch! []
-  (reset! css-watcher (sail/watch "target/public/styles.gen.css")))
+  ;; N.B global version, works for projects other than sail where, because we define all the classes, everything will
+  ;; be generated!
+  ;; (sail/watch "target/public/styles.gen.css")
+  (sail/watch "target/public/styles.gen.css" {:path "./src/cljs"})
+  )
 
-(defn close-watcher [] (dw/close-watcher @css-watcher))
-(defn restart-watcher []
-  (dw/close-watcher @css-watcher)
-  (start-css-watch!))
+(defn stop-css-watch! []
+  (sail/stop-watch))
+
+(defn build-css! []
+  (sail/build "styles.test.gen.css" {:path "./src/cljs"}))
 
 (defn dev []
-  (sh "mkdir" "-p" "./target/public")
-  ;; (sail/generate-styles "target/public/styles.gen.css")
   (start-css-watch!)
   (start-figwheel!))

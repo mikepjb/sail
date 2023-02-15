@@ -5,3 +5,5 @@ target/
 generated-style.css
 .clj-kondo
 .lsp
+*.log
+*.gen.css
