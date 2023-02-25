@@ -141,7 +141,7 @@
                 acc
                 (recur (conj acc form) (read reader false eof)))))))
       (catch Exception e
-        (str "Exception while reading keywords in file: " filepath ", got: " (.getMessage e))))))
+        (log/info (str "Exception while reading keywords in file: " filepath ", got: " (.getMessage e)))))))
 
 (def default-keywords
   [:html :body :* [:* (keyword "::before") (keyword "::after")]])
@@ -150,6 +150,8 @@
   (->> (file-seq (clojure.java.io/file (or path "src")))
        (filter #(.isFile %))
        (filter #(not (clojure.string/ends-with? (.getName %) ".cljc")))
+       ;; TODO need to read all files, ignore files that error
+       ;; needs a test case!
        (#(mapcat all-keywords-in-file %))
        (into default-keywords)))
 
