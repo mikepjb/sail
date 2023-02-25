@@ -191,9 +191,7 @@
    (let [dir (or path (System/getProperty "user.dir"))]
          (io/make-parents output)
          (log/info output opts)
-         (log/info "ok1")
          (build output opts)
-         (log/info "ok2")
          (reset! css-watcher
                  (dw/watch-dir
                    (fn [{:keys [file]}]
