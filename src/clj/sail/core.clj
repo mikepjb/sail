@@ -131,7 +131,7 @@
 (defn all-keywords-in-file [filepath]
   (let [reader (java.io.PushbackReader. (clojure.java.io/reader filepath))
         eof (Object.)]
-    (try
+    (try ;; TODO we can't read files with syntax errors, we should detect this!
       (set
         (filter keyword?
           (flatten ;; TODO may have to flatten completely
@@ -161,9 +161,13 @@
 (defn purge-and-generate-styles [output {:keys [path css-file] :as opts}]
   (log/info (str "purge-and-generate-styles to: " output) opts)
   (let [kws (all-project-keywords path)
-        generated-content (internal-generate-styles
-                            (purge-styles all kws)
-                            (purge-styles components kws))]
+        out-all (if (:purge opts)
+                  (purge-styles all kws)
+                  all)
+        out-components (if (:purge opts)
+                         (purge-styles components kws)
+                         components)
+        generated-content (internal-generate-styles out-all out-components)]
     (spit output (if css-file
                  (str generated-content (slurp css-file))
                  generated-content))))
@@ -172,12 +176,15 @@
   ^{:doc "Contains the dirwatch process to control sail's watching for compilation process"}
   css-watcher (atom nil))
 
+(def default-opts
+  {:purge true})
+
 (defn build
   ([output]
    (build output {}))
   ([output {:keys [path] :as opts}]
    (let [dir (or path (System/getProperty "user.dir"))]
-     (purge-and-generate-styles output (merge opts {:path dir})))))
+     (purge-and-generate-styles output (merge default-opts opts {:path dir})))))
 
 (defn watcher-running? []
   (not (nil? @css-watcher)))

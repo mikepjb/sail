@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.8.4"]
-{com.hypalynx/sail {:mvn/version "0.8.4"}}
+[com.hypalynx/sail "0.8.5"]
+{com.hypalynx/sail {:mvn/version "0.8.5"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -46,6 +46,11 @@ Include the following in your build sequence to get your css:
 
 If you add depenedencies, you must add them to both deps.edn and pom.xml.. ideally we generate the pom file to be
 honest but this works for now.
+
+### TODO / Known Issues
+
+When watching/regenerating files.. the new file won't refresh? need to test this and confirm for both shadow & figwheel
+  - figwheel works.. you just have to configure the css-dirs to live reload them
 
 ## Implementation notes
 
