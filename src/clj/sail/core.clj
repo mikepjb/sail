@@ -131,14 +131,17 @@
 (defn all-keywords-in-file [filepath]
   (let [reader (java.io.PushbackReader. (clojure.java.io/reader filepath))
         eof (Object.)]
-    (set
-      (filter keyword?
-              (flatten ;; TODO may have to flatten completely
-                (loop [acc []
-                       form (read reader false eof)]
-                  (if (identical? eof form)
-                    acc
-                    (recur (conj acc form) (read reader false eof)))))))))
+    (try
+      (set
+        (filter keyword?
+          (flatten ;; TODO may have to flatten completely
+            (loop [acc []
+                   form (read reader false eof)]
+              (if (identical? eof form)
+                acc
+                (recur (conj acc form) (read reader false eof)))))))
+      (catch Exception e
+        (str "Exception while reading keywords in file: " filepath ", got: " (.getMessage e))))))
 
 (def default-keywords
   [:html :body :* [:* (keyword "::before") (keyword "::after")]])
