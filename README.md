@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.8.5"]
-{com.hypalynx/sail {:mvn/version "0.8.5"}}
+[com.hypalynx/sail "0.8.6"]
+{com.hypalynx/sail {:mvn/version "0.8.6"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -51,6 +51,9 @@ honest but this works for now.
 
 When watching/regenerating files.. the new file won't refresh? need to test this and confirm for both shadow & figwheel
   - figwheel works.. you just have to configure the css-dirs to live reload them
+
+- Watcher will rewrite the output file even if there are no changes. (e.g file change triggers rebuild but the css is
+  computed to be exactly the same)
 
 ## Implementation notes
 

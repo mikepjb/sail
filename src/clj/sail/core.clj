@@ -146,12 +146,16 @@
 (def default-keywords
   [:html :body :* [:* (keyword "::before") (keyword "::after")]])
 
+(defn clojure-file? [file-path]
+  (some #(clojure.string/ends-with? file-path %)
+        [;; ".cljc" ".edn" ;; I get errors reading these but it would
+         ;; be useful to consume them.
+         ".cljs" ".clj"]))
+
 (defn all-project-keywords [path]
   (->> (file-seq (clojure.java.io/file (or path "src")))
        (filter #(.isFile %))
-       (filter #(not (clojure.string/ends-with? (.getName %) ".cljc")))
-       ;; TODO need to read all files, ignore files that error
-       ;; needs a test case!
+       (filter #(clojure-file? (.getName %)))
        (#(mapcat all-keywords-in-file %))
        (into default-keywords)))
 
@@ -193,7 +197,7 @@
 (defn watch
   "Watch & rebuild styles on file modified, useful when developing to view sites with purged code as you would use in production.
   Also useful for providing the feedback when manipulating classes in Clojure e.g splitting (str \"bg-green-\" v).
-  
+
   Takes optional args:
   :path directory to watch for new uses of css classes (e.g your project code)
   "
