@@ -72,6 +72,10 @@
            (gradient-to-color-class "to")
            (with-pseudo-class "hover" (gradient-to-color-class "to"))
 
+           (color-class "accent" "accent-color")
+           (with-pseudo-class "hover" (color-class "accent" "accent-color"))
+           (with-pseudo-class "focus" (color-class "accent" "accent-color"))
+
            (with-pseudo-class "hover" (color-class "border" "border-color"))
            (with-pseudo-class "focus" (color-class "border" "border-color"))
            [:rounded-none {:border-radius "none"}

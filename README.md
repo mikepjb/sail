@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.8.10"]
-{com.hypalynx/sail {:mvn/version "0.8.10"}}
+[com.hypalynx/sail "0.8.11"]
+{com.hypalynx/sail {:mvn/version "0.8.11"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -36,10 +36,10 @@ Require it in a namespace, like dev.user:
 Include the following in your build sequence to get your css:
 ```clojure
 ;; generates all tailwind classes to use in development and re-builds when changes occur
-(sail/watch "target/public/styles.gen.css" {:path "./src/cljs"})
+(sail/watch "target/public/styles.gen.css" {:paths ["./src/cljs"]})
 
 ;; generates all tailwind classes once, used for production builds
-(sail/build "styles.test.gen.css" {:path "./src/cljs"})
+(sail/build "styles.test.gen.css" {:paths ["./src/cljs"]})
 ```
 
 ## Usage Notes

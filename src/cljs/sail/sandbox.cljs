@@ -37,6 +37,7 @@
    [:div.text-sm "N.B flat hover only works over gradients if you include hover:bg-none to cancel out the applied background-image, maybe this should be included?"]
    [:div.w-32.my-4.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.hover:bg-none.hover:bg-green-400 "gradient test with flat hover color"]
    [:div.w-32.my-4.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.hover:from-pink-500.hover:to-yellow-500 "gradient test with gradient hover color"]
+   [:input.accent-pink-500 {:type :checkbox :checked true}]
    [flex-row]
    [flex-col]
    [media-query-test]

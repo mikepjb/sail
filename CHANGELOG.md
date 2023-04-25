@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.11
+
+- include `accent-color` (e.g `accent-blue-500`) classes for coloring checkboxes etc.
+
 ## 0.8.10
 
 - basic gradients included (from/to/directions but no advanced %/via etc)
