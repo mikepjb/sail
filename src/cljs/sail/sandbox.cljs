@@ -31,7 +31,12 @@
 (defn app [state]
   [:div.m-4.flex.flex-col
    "Sail Sandbox Environment"
-   [:div.w-32.my-4.p-2.font-semibold.bg-red-300.text-orange-900.rounded.shadow.shadow-orange-800 "hello"]
+   [:div.w-32.my-4.p-2.font-semibold.bg-red-300.text-orange-900.rounded.shadow.shadow-orange-800.hover:bg-red-800.cursor-pointer "standard test"]
+   [:div.w-32.my-4.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800 "gradient test"]
+   [:div.w-32.my-4.p-2.font-semibold.bg-gradient-to-tl.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800 "gradient test 2"]
+   [:div.text-sm "N.B flat hover only works over gradients if you include hover:bg-none to cancel out the applied background-image, maybe this should be included?"]
+   [:div.w-32.my-4.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.hover:bg-none.hover:bg-green-400 "gradient test with flat hover color"]
+   [:div.w-32.my-4.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.hover:from-pink-500.hover:to-yellow-500 "gradient test with gradient hover color"]
    [flex-row]
    [flex-col]
    [media-query-test]

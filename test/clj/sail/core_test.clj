@@ -30,3 +30,8 @@
   (testing "styles can be changed into css strings"
     (is (= (sail/style->string test-styles) 
            "main{display:block;}h1{font-size:2em;margin:0.67em 0;}hr{box-sizing:content-box;height:0;overflow:visible;}"))))
+
+;; TODO requires purge-and-generate-styles to output to string really.
+;; (deftest purging
+;;   (testing "we don't lose hover classes on purge"
+;;     )

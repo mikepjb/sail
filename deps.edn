@@ -1,4 +1,4 @@
-{:paths ["src/clj" "src/cljc" "resources"]
+{:paths ["src/clj" "src/cljc" "resources" "target"]
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         juxt/dirwatch {:mvn/version "0.2.5"}
         com.taoensso/timbre {:mvn/version "6.0.1"}}

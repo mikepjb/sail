@@ -1,5 +1,5 @@
 (ns sail.components
-  (:require [sail.color :refer [palette color-class rgba-color-class
+  (:require [sail.color :refer [color-class rgba-color-class
                                 gradient-from-color-class
                                 gradient-to-color-class]]))
 
@@ -45,6 +45,17 @@
    :bg-cover {:background-size "cover"}
    :bg-contain {:background-size "contain"}])
 
+(def background-gradients
+  [:bg-none {:background-image "none"}
+   :bg-gradient-to-t {:background-image "linear-gradient(to top, var(--sail-gradient-stops))"}
+   :bg-gradient-to-tr {:background-image "linear-gradient(to top right, var(--sail-gradient-stops))"}
+   :bg-gradient-to-r {:background-image "linear-gradient(to right, var(--sail-gradient-stops))"}
+   :bg-gradient-to-br {:background-image "linear-gradient(to bottom right, var(--sail-gradient-stops))"}
+   :bg-gradient-to-b {:background-image "linear-gradient(to bottom, var(--sail-gradient-stops))"}
+   :bg-gradient-to-bl {:background-image "linear-gradient(to bottom left, var(--sail-gradient-stops))"}
+   :bg-gradient-to-l {:background-image "linear-gradient(to left, var(--sail-gradient-stops))"}
+   :bg-gradient-to-tl {:background-image "linear-gradient(to top left, var(--sail-gradient-stops))"}])
+
 (def border
   (reduce into
           [[:border-collapse {:border-collapse "collapse"}
@@ -53,17 +64,13 @@
            (color-class "border" "border-color")
 
            ;; WIP
-           [:bg-none {:background-image "none"}
-            :bg-gradient-to-t {:background-image "linear-gradient(to top, var(--sail-gradient-stops)"}
-            :bg-gradient-to-tr {:background-image "linear-gradient(to top right, var(--sail-gradient-stops)"}
-            :bg-gradient-to-r {:background-image "linear-gradient(to right, var(--sail-gradient-stops)"}
-            :bg-gradient-to-br {:background-image "linear-gradient(to bottom right, var(--sail-gradient-stops)"}
-            :bg-gradient-to-b {:background-image "linear-gradient(to bottom, var(--sail-gradient-stops)"}
-            :bg-gradient-to-bl {:background-image "linear-gradient(to bottom left, var(--sail-gradient-stops)"}
-            :bg-gradient-to-l {:background-image "linear-gradient(to left, var(--sail-gradient-stops)"}
-            :bg-gradient-to-tl {:background-image "linear-gradient(to top left, var(--sail-gradient-stops)"}]
+           background-gradients
+           (with-pseudo-class "hover" background-gradients)
+           (with-pseudo-class "focus" background-gradients)
            (gradient-from-color-class "from")
-           (gradient-to-color-class "from")
+           (with-pseudo-class "hover" (gradient-from-color-class "from"))
+           (gradient-to-color-class "to")
+           (with-pseudo-class "hover" (gradient-to-color-class "to"))
 
            (with-pseudo-class "hover" (color-class "border" "border-color"))
            (with-pseudo-class "focus" (color-class "border" "border-color"))

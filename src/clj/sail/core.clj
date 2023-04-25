@@ -119,9 +119,23 @@
               [tag])))
     [] tags))
 
+(defn convert-pseudo-classes
+  "Converts hiccup class reference to css or what we expect in sail's lookup table e.g :hover:red-400 -> :hover\\:red-400:hover"
+  [classes]
+  (map (fn [c]
+         (if (keyword? c)
+           (cond
+             (s/includes? c "hover") (keyword (str (s/replace (name c) ":" "\\:") ":hover"))
+             (s/includes? c "active") (keyword (str (s/replace (name c) ":" "\\:") ":active"))
+             (s/includes? c "focus") (keyword (str (s/replace (name c) ":" "\\:") ":focus"))
+             :else c)
+           c)
+         ) classes))
+
 ;; used-css-classes aren't just classes but 'keywords' like body/html, psedo tags etc
 (defn purge-styles [css-styles used-css-classes]
-  (let [split-used-css-classes (split-tags-and-classes used-css-classes)]
+  (let [split-used-css-classes (-> (split-tags-and-classes used-css-classes)
+                                   convert-pseudo-classes)]
         (reduce (fn [coll [k v]]
                   (if (some #{k} split-used-css-classes)
                     (into coll [k v])
@@ -152,7 +166,9 @@
          ;; be useful to consume them.
          ".cljs" ".clj"]))
 
-(defn all-project-keywords [path]
+(defn all-project-keywords
+  "Pulls out all the keywords for the given path (but not split e.g :div.rounded.p-4 not [:rounded :p-4])"
+  [path]
   (->> (file-seq (clojure.java.io/file (or path "src")))
        (filter #(.isFile %))
        (filter #(clojure-file? (.getName %)))

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.10
+
+- basic gradients included (from/to/directions but no advanced %/via etc)
+- bugfix: avoid purging hover/focus/active (pseudoclasses)
+- sandbox now includes examples of hover states for flat & gradient colored buttons
+
+## 0.8.9
+
+- not a full release, testing gradient generation
+
 ## 0.8.8
 
 - watch/build now supports multiple `:paths` like `deps.edn`

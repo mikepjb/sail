@@ -10,9 +10,11 @@
      :options {:output-to "target/public/cljs-out/main.js"
                :main 'sail.sandbox}
      :config {:watch-dirs ["src/cljs" "src/cljc"]
+              :css-dirs ["target/public/styles.gen.css"]
               :open-url false
               :mode :serve
-              :connect-url "http://172.27.74.87:9500/figwheel-connect" ;; for WSL2 only
+              ;; TODO watch out for this!
+              ;; :connect-url "http://172.27.74.87:9500/figwheel-connect" ;; for WSL2 only
               }}))
 
 (defn start-css-watch! []
@@ -20,6 +22,7 @@
   ;; be generated!
   ;; (sail/watch "target/public/styles.gen.css")
   (sail/watch "target/public/styles.gen.css" {:paths ["./src/cljs" "./resources"]})
+  ;; (sail/watch "target/public/styles.gen.css" {:paths ["./src/cljs"]})
   )
 
 (defn stop-css-watch! []
