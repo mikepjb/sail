@@ -13,9 +13,9 @@
               :css-dirs ["target/public/styles.gen.css"]
               :open-url false
               :mode :serve
-              ;; TODO watch out for this!
               ;; :connect-url "http://172.27.74.87:9500/figwheel-connect" ;; for WSL2 only
-              }}))
+              ;; for some reason, I needed to set this - I wonder what the default is?
+              :connect-url "http://localhost:9500/figwheel-connect"}}))
 
 (defn start-css-watch! []
   ;; N.B global version, works for projects other than sail where, because we define all the classes, everything will

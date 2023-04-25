@@ -5,7 +5,7 @@
  :jvm-opts ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/slf4j-factory"]
  :aliases {:dev {:extra-paths ["dev" "src/cljs"]
                  :extra-deps {reagent/reagent {:mvn/version "1.0.0"}
-                              com.bhauman/figwheel-main {:mvn/version "0.2.12"}}}
+                              com.bhauman/figwheel-main {:mvn/version "0.2.18"}}}
            :test {:extra-paths ["test/clj"] :extra-deps {lambdaisland/kaocha {:mvn/version "1.60.945"}
                                                          com.hypalynx/css-validator {:mvn/version "cssval-20211112"}}}
            :pack {:extra-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"

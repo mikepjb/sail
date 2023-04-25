@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.12
+
+- include `gap` classes (e.g `gap-x-4`) to provide spacing between rows & columns in grid and flexbox layouts.
+
 ## 0.8.11
 
 - include `accent-color` (e.g `accent-blue-500`) classes for coloring checkboxes etc.

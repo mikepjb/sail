@@ -24,8 +24,8 @@ I love to use.**
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.8.11"]
-{com.hypalynx/sail {:mvn/version "0.8.11"}}
+[com.hypalynx/sail "0.8.12"]
+{com.hypalynx/sail {:mvn/version "0.8.12"}}
 ```
 
 Require it in a namespace, like dev.user:
@@ -44,7 +44,12 @@ Include the following in your build sequence to get your css:
 
 ## Usage Notes
 
-- 8 pt grid: w-2 w-4 w-6 w-8 w-16 w-32 w-64 == 8px 16px 24px 32px 64px 128p 256px
+### Grid Equivalents
+  (N.B 4px is useful for things like py-2 which have 4px either side to == 8px total)
+- 8 pt grid: w-1 w-2 w-4 w-6 w-8 w-16 w-32 w-64 == 4px 8px 16px 24px 32px 64px 128p 256px
+- 8 pt grid: text-xs, text-base, text-2xl, text-5xl, text-9xl == font-size/line-height, 12px/16px, 16px/24px, 24px/32px, 48px, 128px
+
+
 
 ## Development
 

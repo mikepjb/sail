@@ -311,10 +311,13 @@
            (leading-class)
            (tracking-class)]))
 
+;; TODO there are .5 spacings but hiccup seperates with a . per class, how to handle?
 (def spacing-table
   {:0 "0"
    :1 "0.25rem"
-   :2 "0.5rem"
+   ;; :1.5 "0.25rem"
+   :2 "0.5rem" ;; 8px
+   ;; :2.5 "0.625rem" ;; 10px
    :3 "0.75rem"
    :4 "1rem"
    :5 "1.25rem"
@@ -480,10 +483,14 @@
             (spacing-class "right" "right")
             (spacing-class "bottom" "bottom")
             (spacing-class "left" "left")
-           [:resize-none {:resize "none"}
-            :resize-y {:resize "vertical"}
-            :resize-x {:resize "horizontal"}
-            :resize {:resize "both"}]]))
+            [:resize-none {:resize "none"}
+             :resize-y {:resize "vertical"}
+             :resize-x {:resize "horizontal"}
+             :resize {:resize "both"}]
+            (spacing-class "gap" "gap")
+            (spacing-class "gap-x" "column-gap")
+            (spacing-class "gap-y" "row-gap")
+            ]))
 
 (def opacity
   (reduce
@@ -504,8 +511,6 @@
 
 ;; for now: base shadow is a single class and opacity is default 50 only (until
 ;; we also implement JIT to avoid dev slowdown)
-
-    
 
 (def base-shadow
   [:shadow     {:--tw-shadow "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
