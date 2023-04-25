@@ -19,14 +19,14 @@
   ;; N.B global version, works for projects other than sail where, because we define all the classes, everything will
   ;; be generated!
   ;; (sail/watch "target/public/styles.gen.css")
-  (sail/watch "target/public/styles.gen.css" {:path "./src/cljs"})
+  (sail/watch "target/public/styles.gen.css" {:paths ["./src/cljs" "./resources"]})
   )
 
 (defn stop-css-watch! []
   (sail/stop-watch))
 
 (defn build-css! []
-  (sail/build "styles.test.gen.css" {:path "./src/cljs"}))
+  (sail/build "styles.test.gen.css" {:paths ["./src/cljs"]}))
 
 (defn dev []
   (start-css-watch!)

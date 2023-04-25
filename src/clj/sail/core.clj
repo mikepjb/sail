@@ -162,9 +162,9 @@
 ;; TODO generate-styles is currently over-zealous and will include used styles for ALL media queries even if they
 ;; aren't used.
 ;; E.g bg-red-400 is included in project code so xl:bg-red-400, lg:bg-red-400 etc are all included.
-(defn purge-and-generate-styles [output {:keys [path css-file] :as opts}]
+(defn purge-and-generate-styles [output {:keys [paths css-file] :as opts}]
   (log/info (str "purge-and-generate-styles to: " output) opts)
-  (let [kws (all-project-keywords path)
+  (let [kws (mapcat all-project-keywords paths)
         out-all (if (:purge opts)
                   (purge-styles all kws)
                   all)
@@ -186,12 +186,19 @@
 (defn build
   ([output]
    (build output {}))
-  ([output {:keys [path] :as opts}]
-   (let [dir (or path (System/getProperty "user.dir"))]
-     (purge-and-generate-styles output (merge default-opts opts {:path dir})))))
+  ([output {:keys [paths] :as opts}]
+   (let [dirs (or paths [(System/getProperty "user.dir")])]
+     (purge-and-generate-styles output (merge default-opts opts {:paths dirs})))))
 
 (defn watcher-running? []
   (not (nil? @css-watcher)))
+
+(defn- watch-fn [output opts]
+  (fn [{:keys [file]}]
+    (let [path (.getAbsolutePath file)]
+      (when-not (s/includes? path output)
+        (log/info (str "watcher requested style generation: " path))
+        (build output opts)))))
 
 ;; TODO watch/build fns share a lot of code, generalise the setup for both of these!
 (defn watch
@@ -203,19 +210,18 @@
   "
   ([output]
    (watch output {}))
-  ([output {:keys [path] :as opts}]
-   (let [dir (or path (System/getProperty "user.dir"))]
+  ([output {:keys [paths] :as opts}]
+   (let [dirs (or paths [(System/getProperty "user.dir")])]
          (io/make-parents output)
          (log/info output opts)
          (build output opts)
          (reset! css-watcher
-                 (dw/watch-dir
-                   (fn [{:keys [file]}]
-                     (let [path (.getAbsolutePath file)]
-                       (when-not (s/includes? path output)
-                         (log/info (str "watcher requested style generation: " path))
-                         (build output opts)))) (io/file dir)))
-         (log/info (str "sail watcher started, monitoring file changes under " dir)))))
+                 (apply (partial dw/watch-dir (watch-fn output opts))
+                        (map io/file dirs))
+                 ;; (apply dw/watch-dir (into [(watch-fn output opts)] (io/file dirs)))
+                 ;; (dw/watch-dir (watch-fn output opts) (io/file (first dirs)))
+                 )
+         (log/info (str "sail watcher started, monitoring file changes under " dirs)))))
 
 (defn stop-watch []
   (if @css-watcher
