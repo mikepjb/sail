@@ -1,5 +1,7 @@
 (ns sail.components
-  (:require [sail.color :refer [palette color-class rgba-color-class]]))
+  (:require [sail.color :refer [palette color-class rgba-color-class
+                                gradient-from-color-class
+                                gradient-to-color-class]]))
 
 ;; (defn with-media-query)
 (defn with-pseudo-class
@@ -49,6 +51,20 @@
             :border-separate {:border-collapse "separate"}
             :border-transparent {:border-collapse "transparent"}]
            (color-class "border" "border-color")
+
+           ;; WIP
+           [:bg-none {:background-image "none"}
+            :bg-gradient-to-t {:background-image "linear-gradient(to top, var(--sail-gradient-stops)"}
+            :bg-gradient-to-tr {:background-image "linear-gradient(to top right, var(--sail-gradient-stops)"}
+            :bg-gradient-to-r {:background-image "linear-gradient(to right, var(--sail-gradient-stops)"}
+            :bg-gradient-to-br {:background-image "linear-gradient(to bottom right, var(--sail-gradient-stops)"}
+            :bg-gradient-to-b {:background-image "linear-gradient(to bottom, var(--sail-gradient-stops)"}
+            :bg-gradient-to-bl {:background-image "linear-gradient(to bottom left, var(--sail-gradient-stops)"}
+            :bg-gradient-to-l {:background-image "linear-gradient(to left, var(--sail-gradient-stops)"}
+            :bg-gradient-to-tl {:background-image "linear-gradient(to top left, var(--sail-gradient-stops)"}]
+           (gradient-from-color-class "from")
+           (gradient-to-color-class "from")
+
            (with-pseudo-class "hover" (color-class "border" "border-color"))
            (with-pseudo-class "focus" (color-class "border" "border-color"))
            [:rounded-none {:border-radius "none"}

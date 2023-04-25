@@ -286,17 +286,46 @@
    :rose-900 "#881337"
    :rose-950 "#4c0519"})
 
-(defn color-class [prefix property]
+(defn color-class
   "Generates the css classes for a given property, for all colors."
+  [prefix property]
   (reduce (fn [coll [color hex]]
             (into coll [(keyword (str prefix "-" (name color)))
                         {(keyword property) hex}]))
           [] palette))
 
-(defn rgba-color-class [prefix property rgba-property opacity]
-  "Generates the css classes for a given property, for all colors."
+(defn rgba-color-class
+  "Generates the rgba css classes for a given property, for all colors."
+  [prefix property rgba-property opacity]
   (reduce (fn [coll [color hex]]
             (into coll [(keyword (str prefix "-" (name color)))
                         {(keyword property) "var(--tw-shadow-colored)"
                          (keyword rgba-property) (hex->rgba hex opacity)}]))
           [] palette))
+
+;; TODO ideally we don't have a specialised function AND prefix for these
+(defn gradient-from-color-class
+  [prefix]
+  (reduce (fn [coll [color hex]]
+            (into coll [(keyword (str prefix "-" (name color)))
+                        {(keyword "--sail-gradient-from") (str hex " var(--sail-gradient-from-position)")
+                         (keyword "--sail-gradient-from-position") ""
+                         (keyword "--sail-gradient-to") (str hex "00 var(--sail-gradient-from-position)")
+                         (keyword "--sail-gradient-to-position") ""
+                         (keyword "--sail-gradient-stops") "var(--sail-gradient-from), var(--sail-gradient-to)"
+                         }]))
+          [] palette))
+
+(defn gradient-to-color-class
+  [prefix]
+  (reduce (fn [coll [color hex]]
+            (into coll [(keyword (str prefix "-" (name color)))
+                        {(keyword "--sail-gradient-to") (str hex " var(--sail-gradient-to-position)")
+                         (keyword "--sail-gradient-to-position") ""
+                         }]))
+          [] palette))
+
+(comment
+  (take 2 (gradient-color-class "from"))
+         )
+
