@@ -2,8 +2,6 @@
   (:require [clojure.string :as s])
   #?(:clj (:import [java.lang Integer])))
 
-(Integer/parseInt "f0" 16)
-
 (defn hex->rgba [hex opacity]
   (let [hex-values
         (-> hex
