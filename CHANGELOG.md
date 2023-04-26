@@ -1,7 +1,12 @@
 # Changelog
 
+## 0.8.14
+
+- version bump, last version seems corrupted on Clojars? (checksum invalidation)
+
 ## 0.8.13
 
+- Clojars version seems to be corrupted?
 - avoid looking for tailwind classes in namespaced keywords
 
 ## 0.8.12
