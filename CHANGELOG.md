@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.13
+
+- avoid looking for tailwind classes in namespaced keywords
+
 ## 0.8.12
 
 - include `gap` classes (e.g `gap-x-4`) to provide spacing between rows & columns in grid and flexbox layouts.

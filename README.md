@@ -20,12 +20,14 @@ library, without the you (the library user) having to depend on npm/node.
 **Sail is essentially a Clojure port of the Tailwind CSS workflow/build system
 I love to use.**
 
+Sail requires Clojure 1.9+
+
 ## Getting Started
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.8.12"]
-{com.hypalynx/sail {:mvn/version "0.8.12"}}
+[com.hypalynx/sail "0.8.13"]
+{com.hypalynx/sail {:mvn/version "0.8.13"}}
 ```
 
 Require it in a namespace, like dev.user:

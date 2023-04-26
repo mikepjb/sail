@@ -147,7 +147,9 @@
         eof (Object.)]
     (try ;; TODO we can't read files with syntax errors, we should detect this!
       (set
-        (filter keyword?
+        ;; N.B we use simple-keyword? > keyword? to avoid keywords with namespaces as it's not normal to use these in
+        ;; hiccup where we expect to see tailwind classes.
+        (filter simple-keyword?
           (flatten ;; TODO may have to flatten completely
             (loop [acc []
                    form (read reader false eof)]
@@ -189,8 +191,8 @@
                          components)
         generated-content (internal-generate-styles out-all out-components)]
     (spit output (if css-file
-                 (str generated-content (slurp css-file))
-                 generated-content))))
+                   (str generated-content (slurp css-file))
+                   generated-content))))
 
 (defonce
   ^{:doc "Contains the dirwatch process to control sail's watching for compilation process"}
