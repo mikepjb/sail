@@ -53,6 +53,7 @@
     [:div.inline-flex.p-2.font-semibold.bg-red-300.text-orange-900.rounded.shadow.shadow-orange-800.hover:bg-red-800.cursor-pointer "standard test"]
     [:div.inline-flex.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800 "gradient test"]
     [:div.inline-flex.p-2.font-semibold.bg-gradient-to-tl.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800 "gradient test 2"]
+    [:div.inline-flex.p-2.font-semibold.bg-gradient-to-tl.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.blur-sm "blur gradient"]
     [:div.inline-flex.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.hover:bg-none.hover:bg-green-400 "gradient test with flat hover color"]
     [:div.inline-flex.w-32.p-2.font-semibold.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800.hover:from-pink-500.hover:to-yellow-500 "gradient test with gradient hover color"]]])
 

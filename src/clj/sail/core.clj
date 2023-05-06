@@ -147,6 +147,7 @@
         eof (Object.)]
     (try ;; TODO we can't read files with syntax errors, we should detect this!
       (set
+        ;; TODO still getting "Invalid token ::inject/sub etc" for reagent namespaced pieces when reading .cljs files
         ;; N.B we use simple-keyword? > keyword? to avoid keywords with namespaces as it's not normal to use these in
         ;; hiccup where we expect to see tailwind classes.
         (filter simple-keyword?

@@ -512,6 +512,16 @@
 ;; for now: base shadow is a single class and opacity is default 50 only (until
 ;; we also implement JIT to avoid dev slowdown)
 
+(def blur
+  [:blur-none {:filter "blur(0)"}
+   :blur-sm {:filter "blur(4px)"}
+   :blur {:filter "blur(8px)"}
+   :blur-md {:filter "blur(12px)"}
+   :blur-lg {:filter "blur(16px)"}
+   :blur-xl {:filter "blur(24px)"}
+   :blur-2xl {:filter "blur(40px)"}
+   :blur-3xl {:filter "blur(64px)"}])
+
 (def base-shadow
   [:shadow     {:--tw-shadow "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)"
                 :--tw-shadow-colored "0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color)"
@@ -623,6 +633,9 @@
                   :overflow-y-scroll {:overflow-y "scroll"}
                   :scrolling-touch {:-webkit-overflow-scrolling "touch"}
                   :scrolling-auto {:-webkit-overflow-scrolling "auto"}]
+                 blur
+                 (with-pseudo-class "hover" blur)
+                 (with-pseudo-class "focus" blur)
                  base-shadow
                  shadow-color
                  (with-pseudo-class "hover" base-shadow)

@@ -26,8 +26,8 @@ Sail requires Clojure 1.9+
 
 Include sail as a dependency in your project: 
 ```clojure
-[com.hypalynx/sail "0.8.14"]
-{com.hypalynx/sail {:mvn/version "0.8.14"}}
+[com.hypalynx/sail "0.8.15"]
+{com.hypalynx/sail {:mvn/version "0.8.15"}}
 ```
 
 Require it in a namespace, like dev.user:

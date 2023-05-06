@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.15
+
+- include gaussian blur classes `blur` `blur-lg` etc.
+
 ## 0.8.14
 
 - version bump, last version seems corrupted on Clojars? (checksum invalidation)
