@@ -67,7 +67,11 @@
      [title "Font Sizes"]
      [text-sizes]]
     [:div [title "Inputs"]
-     [:input.w-4.h-4.accent-blue-500 {:type :checkbox :default-checked true}]
+     ;; to draw the checkmarks ourselves we likely have to do some input[type='checkbox']:before css-ing.
+     ;; if we want to have beautiful input forms, that's what it takes by the looks of it.
+     ;; To be continued..
+     [:input.w-10.h-10.appearance-none.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded.shadow.shadow-indigo-800  {:type :checkbox :default-checked true}]
+     [:input.w-10.h-10.appearance-none.bg-gradient-to-b.from-indigo-500.to-indigo-900.text-indigo-400.rounded-full.shadow.shadow-indigo-800  {:type :checkbox :default-checked true}]
      [:input.w-4.h-4.accent-pink-500 {:type :checkbox :default-checked true}]
      [:input.w-4.h-4.accent-green-500 {:type :checkbox :default-checked true}]]
     [:div [title "Flex Row and Column"]
