@@ -1,4 +1,6 @@
-![Sail Logo](./sail-logo.png)
+<p align="center">
+  <img width="460" height="300" src="./sail-logo.png">
+</p>
 
 Use Tailwind CSS classes in Clojure, batteries included.
 
