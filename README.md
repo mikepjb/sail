@@ -1,4 +1,4 @@
-(./sail-logo.png)[Sail Logo]
+![Sail Logo](./sail-logo.png)
 
 Use Tailwind CSS classes in Clojure, batteries included.
 
