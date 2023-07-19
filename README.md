@@ -2,27 +2,11 @@
   <img width="460" height="300" src="./sail-logo.png">
 </p>
 
-Use Tailwind CSS classes in Clojure, batteries included.
+Sail is a pure-Clojure generation tool for creating Tailwind CSS classes. This
+includes the ability to only generate the classes that you use by analysing
+the source code in your project.
 
-## Why?
-
-I want to use tailwindcss in Clojure without involving extra dependencies e.g
-npm/node/javascript/postcss/autoprefixer, especially not when this can be done
-in Clojure.
-
-A bit of background to those not familiar with tailwind:  
-
-tailwind is a utility first css framework that is a postcss plugin under the
-hood. It is intended to be used with autoprefixer (another postcss plugin) and
-purgecss.
-
-sail makes the tools provided by tailwind available to Clojure projects as a
-library, without the you (the library user) having to depend on npm/node. 
-
-**Sail is essentially a Clojure port of the Tailwind CSS workflow/build system
-I love to use.**
-
-Sail requires Clojure 1.9+
+[![Clojars Project](https://img.shields.io/clojars/v/com.hypalynx/sail.svg)](https://clojars.org/com.hypalynx/sail)
 
 ## Getting Started
 
