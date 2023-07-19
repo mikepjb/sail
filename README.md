@@ -37,16 +37,16 @@ Include the following in your build sequence to get your css:
 (sail/build "styles.test.gen.css" {:paths ["./src/cljs"]})
 ```
 
-## Usage Notes
+Write some frontend code using reagent:
+```clojure
+(defn my-fancy-component-with-styles []
+  [:div.bg-red-400.text-red-900.px-4.py-2.rounded.shadow-lg "look at this big red button!"])
 
-### Grid Equivalents
-  (N.B 4px is useful for things like py-2 which have 4px either side to == 8px total)
-- 8 pt grid: w-1 w-2 w-4 w-6 w-8 w-16 w-32 w-64 == 4px 8px 16px 24px 32px 64px 128p 256px
-- 8 pt grid: text-xs, text-base, text-2xl, text-5xl, text-9xl == font-size/line-height, 12px/16px, 16px/24px, 24px/32px, 48px, 128px
+```
 
 ## Development
 
-If you add depenedencies, you must add them to both deps.edn and pom.xml.. ideally we generate the pom file to be
+If you add dependencies, you must add them to both deps.edn and pom.xml.. ideally we generate the pom file to be
 honest but this works for now.
 
 ## Technical Differences
