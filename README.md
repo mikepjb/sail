@@ -6,7 +6,14 @@ Sail is a pure-Clojure generation tool for creating Tailwind CSS classes. This
 includes the ability to only generate the classes that you use by analysing
 the source code in your project.
 
-[![Clojars Project](https://img.shields.io/clojars/v/com.hypalynx/sail.svg)](https://clojars.org/com.hypalynx/sail)
+<p align="center">
+  <a href="https://clojars.org/com.hypalynx/sail">
+    <img alt="Clojars Project" src="https://img.shields.io/clojars/v/com.hypalynx/sail.svg" />
+  </a>
+  <a href="https://cljdoc.org/d/com.hypalynx/sail/CURRENT">
+    <img alt="Clojars Project" src="https://cljdoc.org/badge/com.hypalynx/sail" />
+  </a>
+</p>
 
 ## Getting Started
 
